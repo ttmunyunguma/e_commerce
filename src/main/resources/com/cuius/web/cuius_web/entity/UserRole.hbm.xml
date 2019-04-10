@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2019 7:12:28 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cuius.web.cuius_web.entity.UserRole" table="user_role" catalog="project_cuius" optimistic-lock="version">
+        <id name="roleId" type="java.lang.Integer">
+            <column name="role_id" />
+            <generator class="identity" />
+        </id>
+        <property name="roleName" type="string">
+            <column name="role_name" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

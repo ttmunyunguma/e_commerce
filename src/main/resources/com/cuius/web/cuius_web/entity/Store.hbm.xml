@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cuius.web.cuius_web.entity.Store" table="store" catalog="project_cuius" optimistic-lock="version">
+        <id name="storeId" type="java.lang.Integer">
+            <column name="store_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="merchant" class="com.cuius.web.cuius_web.entity.Merchant" fetch="select">
+            <column name="merchant_id" not-null="true" />
+        </many-to-one>
+        <property name="storeName" type="string">
+            <column name="store_name" length="100" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="200" not-null="true" />
+        </property>
+        <property name="latitude" type="double">
+            <column name="latitude" not-null="true" />
+        </property>
+        <property name="longitude" type="double">
+            <column name="longitude" not-null="true" />
+        </property>
+        <property name="storeType" type="string">
+            <column name="store_type" length="50" not-null="true" />
+        </property>
+        <property name="colorCode" type="string">
+            <column name="color_code" length="7" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

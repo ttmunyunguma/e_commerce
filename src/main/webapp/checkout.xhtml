@@ -1,0 +1,797 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cuius | Checkout | Shop Online</title>
+        <!-- Meta -->
+	<meta charset="utf-8"/>
+        <meta http-equiv="Content-Type" content="text/html" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content=""/>
+	<meta name="author" content="Terrence Takunda Munyunguma"/>
+        
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico"/>
+
+	<!-- Web Fonts -->
+	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,800&amp;subset=cyrillic,latin'/>
+
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="assets/css/shop.style.css"/>
+
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet" href="assets/css/headers/header-v5.css"/>
+	<link rel="stylesheet" href="assets/css/footers/footer-v4.css"/>
+
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="assets/plugins/animate.css"/>
+	<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css"/>
+	<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css"/>
+        
+        <!-- Style Switcher -->
+	<link rel="stylesheet" href="assets/css/plugins/style-switcher.css"/>
+
+	<!-- CSS Theme -->
+        <link rel="stylesheet" href="assets/css/theme-colors/aqua.css" id="style_color"/>
+        
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="assets/css/custom.css"/>
+        
+    </h:head>
+    <h:body class="header-fixed">
+        <div class="wrapper">
+            <!--=== Header v5 ===-->
+            <div class="header-v5 header-static">
+                <!-- Topbar v3 -->
+                <div class="topbar-v3">
+                    <h:form enctype="multipart/form-data">
+                        <div class="search-open">
+                            <div class="container input-group custom-search-form">
+                                <p:inputText class="form-control" a:placeholder="Type Keyword to Search Here... Then Press Enter" value="#{searchProduct.keyword}" />
+                                <span class="input-group-btn">
+                                    <p:commandButton action="#{searchProduct.searchedResults()}" style="visibility: hidden"/>
+                                </span>
+                                <div class="search-close"><i class="icon-close"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="search-open">
+                            <div class="container input-group custom-search-form">
+                                <p:fileUpload value="#{vGG16Layer.file}" mode="advanced" dragDropSupport="true" fileUploadListener="#{vGG16Layer.uploadImage}"
+                                              label="Select an Image" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" uploadLabel="Search" 
+                                               invalidFileMessage="You can only Search with an Image" update="messages" />
+                                <div class="search-close"><i class="icon-close"></i></div>
+                            </div>
+                        </div>
+                        <p:growl id="messages" showDetail="true" />
+                    </h:form>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- Topbar Navigation -->
+                                <ul class="left-topbar">
+                                    <li>
+                                        <a>Currency (USD)</a>
+                                        <ul class="currency">
+                                            <li class="active">
+                                                <a href="#">USD <i class="fa fa-check"></i></a>
+                                            </li>
+                                            <li><a href="#">Euro</a></li>
+                                            <li><a href="#">Pound</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a>Language (EN)</a>
+                                        <ul class="language">
+                                            <li class="active">
+                                                <a href="#">English (EN)<i class="fa fa-check"></i></a>
+                                            </li>
+                                            <li><a href="#">Spanish (SPN)</a></li>
+                                            <li><a href="#">Russian (RUS)</a></li>
+                                            <li><a href="#">German (GRM)</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p:link outcome="/admin/index.xhtml" value="Admin"/>
+                                    </li>
+                                </ul><!--/end left-topbar-->
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-inline right-topbar pull-right">
+                                    <li><a href="#">Account</a></li>
+                                    <li><a href="#">Wishlist</a></li>
+                                    <li><p:link outcome="login.xhtml" value="Login" rendered="#{!accountBean.loggedIn}"/> | <p:link outcome="register.xhtml" value="Register" rendered="#{!accountBean.loggedIn}"/></li>
+                                    <li><p:outputLabel value="Hie #{accountBean.user.firstName}" rendered="#{accountBean.loggedIn}"/> | <p:commandLink value="Logout" action="#{accountBean.logout}" rendered="#{accountBean.loggedIn}"/></li>
+                                    <li><i class="search fa fa-search search-button"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!--/container-->
+                </div>
+                <!-- End Topbar v3 -->
+
+                <!-- Navbar -->
+                <div class="navbar navbar-default mega-menu" role="navigation">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="index.xhtml">
+                                <h:graphicImage id="logo-header" url="/assets/img/logo.png" alt="Cuius" height="50" />
+                            </a>
+                        </div>
+
+                        <!-- Shopping Cart -->
+                        <div class="shop-badge badge-icons pull-right">
+                            <h:form id="shopping_cart_form">
+                                <h:outputLink value="checkout.xhtml"><i class="fa fa-shopping-cart"/></h:outputLink>
+                                <span class="badge badge-sea rounded-x"><h:outputText value="#{shoppingCartBean.cartSize}" id="cartIcon"/></span>
+                                <div class="badge-open">
+                                    <ul class="list-unstyled mCustomScrollbar" data-mcs-theme="minimal-dark">
+                                        <p:dataList id="scart" value="#{shoppingCartBean.cartItems}" var="cart">
+                                            <h:graphicImage name="#{cart.item.proPic1}" library="images" width="50" height="50"/>
+                                            <div class="overflow-h">
+                                                <small><h:outputText value="$#{cart.item.proPrice}"/></small>
+                                            </div>
+                                        </p:dataList>
+                                    </ul>
+                                    <div class="subtotal">
+                                        <div class="overflow-h margin-bottom-10">
+                                            <span>Subtotal</span>
+                                            <span class="pull-right subtotal-cost"><h:outputLabel value="$#{shoppingCartBean.total}"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <p:commandLink value="Update Cart" action="#{shoppingCartBean.updateQuantity()}" ajax="false" class="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block"/>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <p:commandLink value="Checkout" class="btn-u btn-u-sea-shop btn-block" action="#{shoppingCartBean.checkOut()}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                        <!-- End Shopping Cart -->
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-responsive-collapse">
+                            <!-- Nav Menu -->
+                            <ul class="nav navbar-nav">
+                                <!-- Store -->
+                                <li class="dropdown mega-menu-fullwidth">
+                                    <p:link outcome="allproducts.xhtml" class="dropdown-toggle">CATALOG</p:link>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="mega-menu-content">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">mobile</h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">computers</h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">Accessories</h3>
+                                                            <h3 class="mega-menu-heading">
+                                                                servers<span class="label label-danger-shop">GPU powered</span>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">Technology</h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">Software</h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">Professional Services</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End Store -->
+                                
+                                <!-- Promotion -->
+                                <li class="dropdown">
+                                    <a href="allproducts.xhtml" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                                        Promotions
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">Broadband</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Wifi</a></li>
+                                                <li><a href="#">LAN</a></li>
+                                                <li><a href="#">Fibre</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">Voice</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">VPN</a></li>
+                                                <li><a href="#">Teleconf</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End Promotion -->
+
+                                <!-- Gifts -->
+                                <li class="dropdown mega-menu-fullwidth">
+                                    <a href="allproducts.xhtml" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                                        Gifts
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="mega-menu-content">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-12 col-xs-12 md-margin-bottom-30">
+                                                            <h3 class="mega-menu-heading">Cuius Gift Program</h3>
+                                                            <p>In conjuction with the TelOne group, we are happy to give back to the community that has been supporting us for the pas...</p>
+                                                            <button type="button" class="btn-u btn-u-dark">Read More</button>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-4 col-xs-4 md-margin-bottom-30">
+                                                            <a href="allproducts.xhtml"><h:graphicImage class="product-offers img-responsive" value="assets/img/blog/01.jpg" alt="gift1"/></a>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-4 col-xs-4 sm-margin-bottom-30">
+                                                            <a href="allproducts.xhtml"><h:graphicImage class="product-offers img-responsive" value="assets/img/blog/02.jpg" alt="gift2"/></a>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-4 col-xs-4">
+                                                            <a href="allproducts.xhtml"><h:graphicImage class="product-offers img-responsive" value="assets/img/blog/03.jpg" alt="gift3"/></a>
+                                                        </div>
+                                                    </div><!--/end row-->
+                                                </div><!--/end container-->
+                                            </div><!--/end mega menu content-->
+                                        </li>
+                                    </ul><!--/end dropdown-menu-->
+                                </li>
+                                <!-- End Gifts -->
+
+                                <!-- Data -->
+                                <li class="dropdown">
+                                    <a href="allproducts.xhtml" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="1000">
+                                        Data
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">LAN</a></li>
+                                        <li><a href="#">Wifi</a></li>
+                                        <li><a href="#">Fibre</a></li>
+                                    </ul>
+                                </li>
+                                <!-- End Data -->
+                            </ul>
+                            <!-- End Nav Menu -->
+                        </div>
+                    </div>
+                </div>
+                <!-- End Navbar -->
+            </div>
+            <!--=== End Header v5 ===-->
+            
+            <!--=== Breadcrumbs v4 ===-->
+            <div class="breadcrumbs-v4">
+                <div class="container">
+                    <span class="page-name">Check Out</span>
+                    <h1>Cuius <span class="shop-green">Online</span> Store</h1>
+                    <ul class="breadcrumb-v4-in">
+                        <li><p:link href="index.html">Home</p:link></li>
+                        <li><p:link href="allProducts.xhtml">Products</p:link></li>
+                        <li class="active">Process Cart</li>
+                    </ul>
+                </div><!--/end container-->
+            </div>
+            <!--=== End Breadcrumbs v4 ===-->
+            
+            <!--=== Content Medium Part ===-->
+            <div class="content-md margin-bottom-30">
+                <div class="container">
+                    <h:form id="form" class="shopping-cart">
+                        <p:growl id="growl" showDetail="true" sticky="true"/>
+                        <p:wizard >
+                            <p:tab id="cart" title="Shopping Cart" class="header-tags">
+                                <p:panel header="Review &amp; Process your cart" class="overflow-h fa fa-check">
+                                    <section>
+                                        <div class="table-responsive">
+                                            <p:dataTable var="cart" value="#{shoppingCartBean.cartItems}" class="table table-striped">
+
+                                                <p:column>
+                                                    <h:graphicImage class="img-responsive" name="#{cart.item.proPic1}" library="images"/>
+                                                </p:column>
+
+                                                <p:column headerText="Product" class="product-in-table">
+                                                    <h3><p:outputLabel value="#{cart.item.proName}" class="product-it-in"/></h3>
+                                                </p:column>
+
+                                                <p:column headerText="Price">
+                                                    <p:outputLabel value="$ #{cart.item.proPrice}"/>
+                                                </p:column>
+
+                                                <p:column headerText="Quantity">
+                                                    <h:commandButton type='button' class="quantity-button" onclick='javascript: subtractQty1();' value='-'></h:commandButton>
+                                                    <p:inputText value="#{cart.quantity}" class="quantity-field" label='qty1' id='qty1'/>
+                                                    <h:commandButton type='button' class="quantity-button" onclick='javascript: document.getElementById("qty1").value++;' value='+'></h:commandButton>
+                                                </p:column>
+
+                                                <p:column headerText="TOTAL $">
+                                                    <p:outputLabel value="#{cart.item.proPrice}" class="shop-red"/>
+                                                </p:column>
+
+                                                <p:column>
+                                                    <p:commandButton value="&times;" action="#{shoppingCartBean.removeItemFromCart(cart.item)}" class="close" update=":form:growl">
+                                                        <span class="sr-only">Close</span>
+                                                    </p:commandButton>
+                                                </p:column>
+
+                                            </p:dataTable>
+                                            <p:commandButton value="Update Cart" action="#{shoppingCartBean.updateQuantity()}" ajax="false"/>
+                                            <p:commandButton value="Continue Shopping" action="#{searchProduct.continueShopping()}" ajax="false"/>
+                                            <br/><br/>If you're done just click the <strong>NEXT</strong> button below
+                                        </div>
+                                    </section>
+                                </p:panel>
+                            </p:tab>
+                            <p:tab id="billing" title="Billing info" class="header-tags">
+                                <p:panel header="Shipping and address info" class="overflow-h fa fa-home">
+                                    <section class="billing-info">
+                                        <div class="row">
+                                            <div class="col-md-6 md-margin-bottom-40">
+                                                <h2 class="title-type">Billing Address</h2>
+                                                <div class="billing-info-inputs checkbox-list">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <p:message for="name" />
+                                                            <p:inputText id="name" placeholder="First Name" value="#{checkOut.firstName}" class="form-control" required="true" requiredMessage="Enter First Name"/>
+                                                            <p:message for="email" />
+                                                            <p:inputText id="email" placeholder="your@email.com" value="#{checkOut.email}" class="form-control email" required="true" requiredMessage="Enter Email" validatorMessage="Enter Valid Email">
+                                                                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+                                                            </p:inputText>
+                                                            
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <p:message for="surname" />
+                                                            <p:inputText id="surname" placeholder="Last Name" value="#{checkOut.lastName}" class="form-control" required="true" requiredMessage="Enter Last Name"/>
+                                                            <p:message for="phone" />
+                                                            <p:inputText id="phone" placeholder="Phone" value="#{checkOut.phone}" class="form-control" required="true" requiredMessage="Enter Phone Number"/>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <p:message for="billingAddress" />
+                                                    <p:inputText id="billingAddress" placeholder="Address Line 1" value="#{checkOut.addLine1}" class="form-control" required="true" requiredMessage="ENter Address"/>
+                                                    
+                                                    <p:inputText id="billingAddress2" placeholder="Address Line 2" value="#{checkOut.addLine2}" class="form-control"/>
+                                                    <div class="row">
+                                                        <div class="col-sm-6"> 
+                                                            <p:message for="city" />
+                                                            <p:inputText id="city" placeholder="City" value="#{checkOut.city}" class="form-control" required="true" requiredMessage="Enter City"/>
+                                                            
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <h:selectOneMenu id="country" value="#{checkOut.country}" class="form-control required">
+                                                                <f:selectItems value="#{checkOut.countryOptions}"/>
+                                                            </h:selectOneMenu>
+                                                        </div>
+                                                    </div>
+
+                                                    <label class="checkbox text-left">
+                                                        <input type="checkbox" name="checkbox"/>
+                                                        <i></i>
+                                                        Ship items to the above billing address
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <h2 class="title-type">Shipping Address</h2>
+                                                <div class="billing-info-inputs checkbox-list">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <input id="name2" type="text" placeholder="First Name" name="firstname" class="form-control"/>
+                                                            <input id="email2" type="text" placeholder="Email" name="email" class="form-control email"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <input id="surname2" type="text" placeholder="Last Name" name="lastname" class="form-control"/>
+                                                            <input id="phone2" type="tel" placeholder="Phone" name="phone" class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                    <input id="shippingAddress" type="text" placeholder="Address Line 1" name="address1" class="form-control"/>
+                                                    <input id="shippingAddress2" type="text" placeholder="Address Line 2" name="address2" class="form-control"/>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <input id="city2" type="text" placeholder="City" name="city" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <input id="zip2" type="text" placeholder="Country" name="zip" class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </p:panel>
+                            </p:tab>
+                            <p:tab id="payment" title="Payment" class="header-tags">
+                                <p:panel header="Select Payment method" class="overflow-h fa fa-credit-card">
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-6 md-margin-bottom-50">
+                                                <h2 class="title-type">Choose a payment method</h2>
+                                                <div class="accordion-v2">
+                                                    <div class="panel-group" id="accordion">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                                        <i class="fa fa-credit-card"></i>
+                                                                        Credit or Debit Card
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div id="collapseOne" class="panel-collapse collapse in">
+                                                                <div class="panel-body cus-form-horizontal">
+                                                                    <div class="form-group">
+                                                                        <p:outputLabel class="col-sm-4 no-col-space control-label" value="Cardholder Name"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:inputText id="cardHolderName" class="form-control" value="#{checkOut.cardHolderName}" required="true" requiredMessage="Enter Name"/>
+                                                                        </div>
+                                                                        <p:message for="cardHolderName" />
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <p:outputLabel class="col-sm-4 no-col-space control-label" value="Card Number"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:inputText id="ccnum" class="form-control" value="#{checkOut.cardNumber}" a:placeholder="0000 0000 0000 0000" required="true" requiredMessage="CC/DC Number" validatorMessage="Enter Valid Card Number" maxlength="16">
+                                                                                <f:validator for="ccnum" validatorId="com.cuius.web.cuius_web.util.CreditCardValidator" />
+                                                                            </p:inputText>
+                                                                        </div>
+                                                                        <p:message for="cardHolderName" />
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <p:outputLabel class="col-sm-4 no-col-space control-label" value="Payment Types"/>
+                                                                        <div class="col-sm-8">
+                                                                            <ul class="list-inline payment-type">
+                                                                                <li><i class="fa fa-cc-visa"></i></li>
+                                                                                <li><i class="fa fa-cc-mastercard"></i></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <p:outputLabel class="col-sm-4" value="Expiration Date"/>
+                                                                        <div class="col-sm-8 ">
+                                                                            <p:inputText class="form-control" value="#{checkOut.expDate}" id="date" a:placeholder="MMYY" required="true" requiredMessage="Enter Date" validatorMessage="Enter Valid Date" maxlength="4">
+                                                                                <f:validateRegex pattern="\d{4}"/>
+                                                                            </p:inputText>
+                                                                        </div>
+                                                                        <p:message for="date" />
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <p:outputLabel class="col-sm-4 no-col-space control-label" value="CVV"/>
+                                                                        <div class="col-sm-8 input-small-field">
+                                                                            <p:password id="cvv" class="form-control" value="#{checkOut.CVV}" required="true" requiredMessage="Enter CVV" validatorMessage="Enter Valid CVV" maxlength="3">
+                                                                                <f:validateRegex pattern="\d{3}"/>
+                                                                            </p:password>
+                                                                            <a href="https://www.cvvnumber.com/cvv.html" target="blank">What's this?</a>
+                                                                        </div>
+                                                                        <p:message for="cvv" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                                        <i class="fa fa-paypal"></i>
+                                                                        Pay with PayPal
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div id="collapseTwo" class="panel-collapse collapse">
+                                                                <div class="content margin-left-10">
+                                                                    <a href="https://www.paypal.com/" target="blank"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png" alt="PayPal"/></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                    </section>
+                                    <div class="col-md-6">
+                                        <h2 class="title-type">all payments made to the cuius regio platform are subject to the cuius <a href="../www.cuius.co.zw/terms" target="blank">Terms and conditions </a>. Cuius decentralized currency will be launched soon      </h2>
+                                    </div>
+                                </p:panel>
+                            </p:tab>
+                            <p:tab id="confirm" title="Confirm" class="header-tags">
+                                <p:panel header="Confirm And Buy" class="overflow-h fa fa-bank">
+                                <section>
+                                    <div class="col-md-6">
+                                        <h2 class="title-type">Confirm your info before you press the finish button</h2>
+                                        <div class="accordion-v2 plus-toggle">
+                                            <div class="panel-group" id="accordion-v2">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion-v2" href="#collapseOne-v2">
+                                                                Billing Information
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseOne-v2" class="panel-collapse collapse in">
+                                                        <div class="panel-body">
+                                                            The bill will be made to:<br/><br/>
+                                                            
+                                                            Name:   <p:outputLabel value="#{checkOut.firstName} #{checkOut.lastName}"/>
+                                                            Email:   <p:outputLabel value="#{checkOut.email}"/>
+                                                            Phone:   <p:outputLabel value="#{checkOut.phone}"/>
+                                                            Address Line 1:   <p:outputLabel value="#{checkOut.addLine1}"/>
+                                                            Address Line 2:   <p:outputLabel value="#{checkOut.addLine2}"/>
+                                                            City:   <p:outputLabel value="#{checkOut.city}"/>
+                                                            Country:   <p:outputLabel value="#{checkOut.country}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" class="collapsed" data-parent="#accordion-v2" href="#collapseTwo-v2">
+                                                                Shipping Information
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseTwo-v2" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            Goods bought on this platform will be addressed to the following:<br/><br/>
+                                                            
+                                                            Name:   <p:outputLabel value="#{checkOut.firstName} #{checkOut.lastName}"/>
+                                                            Email:   <p:outputLabel value="#{checkOut.email}"/>
+                                                            Phone:   <p:outputLabel value="#{checkOut.phone}"/>
+                                                            Address Line 1:   <p:outputLabel value="#{checkOut.addLine1}"/>
+                                                            Address Line 2:   <p:outputLabel value="#{checkOut.addLine2}"/>
+                                                            City:   <p:outputLabel value="#{checkOut.city}"/>
+                                                            Country:   <p:outputLabel value="#{checkOut.country}"/>
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" class="collapsed" data-parent="#accordion-v2" href="#collapseThree-v2">
+                                                                Payment Details
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseThree-v2" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            The following will be charged for goods or services as per cuius <a href="http://www.cuius.co.zw/terms" target="blank">terms and conditions</a><br/><br/> 
+                                                         
+                                                            Card Holder Name: <p:outputLabel value="#{checkOut.cardHolderName}"/>
+                                                            Card Number: <p:outputLabel value="#{checkOut.cardNumber}"/>
+                                                            Card Expiration Date: <p:outputLabel value="#{checkOut.expDate}"/>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" class="collapsed" data-parent="#accordion-v2" href="#collapseFour-v2">
+                                                                Cuius Coin?
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseFour-v2" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            Cuius will soon release a decentralized utility token to be used only on the cuius regio platform.
+                                                            The release of the crypto-currency will be in accordance to the banking standards of the countries
+                                                            in question. 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="coupon-code">
+                                    <div class="row">
+                                        <div class="col-sm-4 sm-margin-bottom-30">
+                                            <h3>Discount Code</h3>
+                                            <p>Enter your coupon code</p>
+                                            <input class="form-control margin-bottom-10" name="code" type="text"/>
+                                            <button type="button" class="btn-u btn-u-sea-shop">Apply Coupon</button>
+                                        </div>
+                                        <div class="col-sm-3 col-sm-offset-5">
+                                            <ul class="list-inline total-result">
+                                                <li>
+                                                    <h4>Subtotal:</h4>
+                                                    <div class="total-result-in">
+                                                        <span><h:outputLabel value="$ #{shoppingCartBean.total}"/></span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <h4>Shipping:</h4>
+                                                    <div class="total-result-in">
+                                                        <span class="text-right">- - - -</span>
+                                                    </div>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li class="total-price">
+                                                    <h4>Total:</h4>
+                                                    <div class="total-result-in">
+                                                        <span><h:outputLabel value="$ #{shoppingCartBean.total}"/></span>
+                                                    </div>
+                                                </li>
+                                                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                                                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                                    <h:graphicImage url="#{resource['images:ajax-loading.gif']}" alt="Please Wait..."/>
+                                                </p:dialog>
+                                                <p:commandButton value="FINISH" action="#{sendPaymentControl.send()}" process="@this"/>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                    </p:panel>
+                            </p:tab>
+                        </p:wizard>
+                    </h:form>
+                </div><!--/end container-->
+            </div>
+            <!--=== End Content Medium Part ===-->
+            
+            <!--=== Shop Subscribe ===-->
+            <div class="shop-subscribe">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 md-margin-bottom-20">
+                            <h2>subscribe to our weekly <strong>newsletter</strong></h2>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Email your email..."/>
+                                    <span class="input-group-btn">
+                                        <button class="btn" type="button"><i class="fa fa-envelope-o"></i></button>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/end container-->
+            </div>
+            <!--=== End Shop Subscribe ===-->
+            
+            <!--=== Footer v4 ===-->
+            <div class="footer-v4">
+                <div class="footer">
+                    <div class="container">
+                        <div class="row">
+                            <!-- About -->
+                            <div class="col-md-4 md-margin-bottom-40">                               
+                                <a href="index.xhtml"><h:graphicImage id="logo-footer" class="footer-logo" url="/assets/img/logo2.png" alt="Cuius"/></a>
+                                <p>Cuius regio, eius religio <br/> Whose realm, His religion</p>
+                                
+                            </div>
+                            <!-- End About -->
+
+                            <!-- Simple List -->
+                            <div class="col-md-2 col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-6">
+                                        <h2 class="thumb-headline">T<small>s</small> &amp; C<small>s</small></h2>
+                                    </div>
+
+                                    <div class="col-sm-12 col-xs-6">
+                                        <h2 class="thumb-headline">Teams</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-6">
+                                        <h2 class="thumb-headline">Utilities</h2>
+                                    </div>
+
+                                    <div class="col-sm-12 col-xs-6">
+                                        <h2 class="thumb-headline">Documentation</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 md-margin-bottom-40">
+                                <div class="row">
+                                    <ul class="list-unstyled address-list margin-bottom-20">
+                                    <li><i class="fa fa-angle-right"></i>Mendel Road Avondale, Harare, Zimbabwe </li>
+                                    <li><i class="fa fa-angle-right"></i>Phone: +263 71 3 99 4446</li>
+                                    <li><i class="fa fa-angle-right"></i>Fax: 263 71 3 99 4446</li>
+                                    <li><i class="fa fa-angle-right"></i>Email: info@cuius.com</li>
+                                </ul>
+
+                                <ul class="list-inline shop-social">
+                                    <li><a href="https://facebook.com/cuiuszw" target="blank"><i class="fb rounded-md fa fa-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/cuiuszw"><i class="tw rounded-md fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="gp rounded-md fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="yt rounded-md fa fa-youtube"></i></a></li>
+                                </ul>
+                                </div>
+                            </div>
+                            <!-- End Simple List -->
+                        </div><!--/end row-->
+                    </div><!--/end continer-->
+                </div><!--/footer-->
+
+                <div class="copyright">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>
+                                    2019 &copy; <a href="http://www.cuius.co.zw/" target="blank">Cuius Inc.</a>. ALL Rights Reserved.
+                                     | <a href="http://www.cuius.co.zw/privacy" target="blank">Privacy Policy</a> | <a href="http://www.cuius.co.zw/terms" target="blank">Terms of Service</a>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-inline sponsors-icons pull-right">
+                                    <li><i class="fa fa-cc-paypal"></i></li>
+                                    <li><i class="fa fa-cc-visa"></i></li>
+                                    <li><i class="fa fa-cc-mastercard"></i></li>
+                                    <li><i class="fa fa-cc-discover"></i></li>
+                                    <li><i class="fa fa-cc-stripe"></i></li>
+                                    <li><i class="fa fa-cc-amex"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/copyright-->
+            </div>
+            <!--=== End Footer v4 ===-->
+            
+        </div>
+        <!-- JS Global Compulsory -->
+        <!--<script src="assets/plugins/jquery/jquery.min.js"></script>-->
+        <script src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <!-- JS Implementing Plugins -->
+        <script src="assets/plugins/back-to-top.js"></script>
+        <script src="assets/plugins/smoothScroll.js"></script>
+        <script src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+        <!-- JS Customization -->
+        <script src="assets/js/custom.js"></script>
+        <!-- JS Page Level -->
+        <script src="assets/js/shop.app.js"></script>
+        <script src="assets/js/forms/page_login.js"></script>
+	<script src="assets/js/forms/product-quantity.js"></script>
+	<script src="assets/js/plugins/style-switcher.js"></script>
+	<script>
+                jQuery(document).ready(function() {
+                        App.init();
+                        Login.initLogin();
+			App.initScrollBar();
+			StyleSwitcher.initStyleSwitcher();
+                });
+        </script>
+        <!--[if lt IE 9]>
+	<script src="assets/plugins/respond.js"></script>
+	<script src="assets/plugins/html5shiv.js"></script>
+	<script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
+	<![endif]-->
+        <!--[if lt IE 10]>
+	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+    </h:body>
+</html>
+

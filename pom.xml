@@ -2,27 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>co.zw.cuius</groupId>
-    <artifactId>webapp</artifactId>
-    <version>1.0-BETA1</version>
+    <groupId>com.cuius.web</groupId>
+    <artifactId>cuius_web</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Cuius Online Market WebApp</name>
-    <description>An E-commerce Web Platform using ISO 8583</description>
-    <url>http://cuius.co.zw</url>
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-        </license>
-    </licenses>
+    <name>cuius_web</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    
     <repositories>
         <repository>
             <id>oracleReleases</id>
@@ -31,9 +22,9 @@
             <layout>default</layout>
         </repository>
     </repositories>
-
+  
     <dependencies>
-
+        
         <!-- JAVA EE DEPENDENCIES -->
         <dependency>
             <groupId>javax</groupId>
@@ -41,7 +32,7 @@
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
-
+        
         <!-- HIBERNATE DEPENDENCIES -->
         <dependency>
             <groupId>org.hibernate.common</groupId>
@@ -78,12 +69,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.13</version>
         </dependency>
-        <!--<dependency>
+<!--        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-search-orm</artifactId>
             <version>5.11.1.Final</version>
         </dependency>-->
-
+        
         <!-- APACHE HELPER DEPENDENCIES -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -117,7 +108,7 @@
             <artifactId>gisfaces-javadoc</artifactId>
             <version>1.9.3</version>
         </dependency>
-
+        
         <!-- PRIMEFACES DEPENDENCIES -->
         <dependency>
             <groupId>org.primefaces</groupId>
@@ -134,7 +125,7 @@
             <artifactId>prettyfaces-jsf2</artifactId>
             <version>3.3.3</version>
         </dependency>
-
+        
         <!-- LOGGER DEPENDENCIES -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -173,7 +164,7 @@
             <version>2.11.2</version>
         </dependency>
 
-
+        
         <!-- JPOS DEPENDENCIES -->
         <dependency>
             <groupId>org.jpos</groupId>
@@ -190,7 +181,7 @@
             <artifactId>jdom2</artifactId>
             <version>2.0.6</version>
         </dependency>
-
+        
         <!-- ARQUILLIAN DEPENDENCIES -->
         <dependency>
             <groupId>org.jboss.arquillian</groupId>
@@ -218,7 +209,7 @@
             <artifactId>lorem</artifactId>
             <version>2.1</version>
         </dependency>
-
+        
         <!-- DeepLearning4j Dependancies -->
         <dependency>
             <groupId>org.deeplearning4j</groupId>
@@ -240,7 +231,7 @@
             <artifactId>datavec-data-image</artifactId>
             <version>1.0.0-beta3</version>
         </dependency>
-
+        
         <dependency>
             <groupId>org.bytedeco.javacpp-presets</groupId>
             <artifactId>openblas</artifactId>
@@ -264,20 +255,7 @@
             <version>1.1.1</version>
         </dependency>
 
-        <!-- JUNIT DEPENDENCIES -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.4.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.4.1</version>
-            <scope>test</scope>
-        </dependency>
-
+        
     </dependencies>
 
     <build>
@@ -287,8 +265,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -331,3 +309,4 @@
     </build>
 
 </project>
+

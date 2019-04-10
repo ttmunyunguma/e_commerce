@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2019 7:12:28 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cuius.web.cuius_web.entity.Product" table="product" catalog="project_cuius" optimistic-lock="version">
+        <id name="proId" type="java.lang.Integer">
+            <column name="pro_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="merchant" class="com.cuius.web.cuius_web.entity.Merchant" fetch="select">
+            <column name="merchant_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="subCategory" class="com.cuius.web.cuius_web.entity.SubCategory" fetch="select">
+            <column name="sub_cat_id" not-null="true" />
+        </many-to-one>
+        <property name="proName" type="string">
+            <column name="pro_name" length="245" not-null="true" />
+        </property>
+        <property name="proPrice" type="double">
+            <column name="pro_price" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="proQty" type="int">
+            <column name="pro_qty" not-null="true" />
+        </property>
+        <property name="proDesc" type="string">
+            <column name="pro_desc" length="2000" not-null="true" />
+        </property>
+        <property name="proPic1" type="string">
+            <column name="pro_pic1" length="100" not-null="true" />
+        </property>
+        <property name="proPic2" type="string">
+            <column name="pro_pic2" length="100" />
+        </property>
+        <property name="proPic3" type="string">
+            <column name="pro_pic3" length="100" />
+        </property>
+        <property name="proPic4" type="string">
+            <column name="pro_pic4" length="100" />
+        </property>
+        <property name="proPic5" type="string">
+            <column name="pro_pic5" length="100" />
+        </property>
+        <set name="productOrders" table="product_order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pro_id" not-null="true" />
+            </key>
+            <one-to-many class="com.cuius.web.cuius_web.entity.ProductOrder" />
+        </set>
+        <set name="productOrderDetailses" table="product_order_details" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pro_id" not-null="true" />
+            </key>
+            <one-to-many class="com.cuius.web.cuius_web.entity.ProductOrderDetails" />
+        </set>
+    </class>
+</hibernate-mapping>

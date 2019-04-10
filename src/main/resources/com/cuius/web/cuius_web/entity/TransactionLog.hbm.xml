@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2019 7:12:28 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cuius.web.cuius_web.entity.TransactionLog" table="transaction_log" catalog="project_cuius" optimistic-lock="version">
+        <id name="logId" type="java.lang.Integer">
+            <column name="log_id" />
+            <generator class="identity" />
+        </id>
+        <property name="customerId" type="int">
+            <column name="customer_id" not-null="true" />
+        </property>
+        <property name="fullNameOnCc" type="string">
+            <column name="full_name_on_cc" length="50" not-null="true" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="first_name" length="100" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="last_name" length="100" not-null="true" />
+        </property>
+        <property name="addressLine1" type="string">
+            <column name="address_line1" length="100" not-null="true" />
+        </property>
+        <property name="addressLine2" type="string">
+            <column name="address_line2" length="100" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" not-null="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="50" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="50" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="50" not-null="true" />
+        </property>
+        <property name="pan" type="string">
+            <column name="PAN" length="100" not-null="true" />
+        </property>
+        <property name="expirationDate" type="string">
+            <column name="expiration_date" length="4" not-null="true" />
+        </property>
+        <property name="transationAmount" type="string">
+            <column name="transation_amount" length="16" not-null="true" />
+        </property>
+        <property name="transactionDateAndTime" type="string">
+            <column name="transaction_date_and_time" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:param name="pageTitle" value="Cuius Admin | View Merchants"/>
+            
+            <ui:define name="content">
+                <!-- Objects Page -->
+                <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">View DAO</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        All Merchants
+                                    </div>
+                                    <div class="panel-body">
+                                                <!--Sub categories-->
+                                                <h:form>
+                                                    <p:dataTable var="merchant" value="#{merchantMB.allMerchants}">
+                                                        <p:column headerText="Id">
+                                                            <h:outputText value="#{merchant.merchantId}" />
+                                                        </p:column>
+                                                        <p:column headerText="Merchant Name">
+                                                            <h:outputText value="#{merchant.companyName}" />
+                                                        </p:column>
+                                                        <p:column headerText="Contact Person">
+                                                            <h:outputText value="#{merchant.contactName}" />
+                                                        </p:column>
+                                                        <p:column headerText="Company HQ">
+                                                            <h:outputText value="#{merchant.companyAddress}" />
+                                                        </p:column>
+                                                        <p:column headerText="Email">
+                                                            <h:outputText value="#{merchant.companyEmail}" />
+                                                        </p:column>
+                                                        <p:column headerText="Phone">
+                                                            <h:outputText value="#{merchant.companyPhone}" />
+                                                        </p:column>
+                                                        <p:column headerText="About">
+                                                            <h:outputText value="#{merchant.companyLogo}" />
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </h:form>
+                                                <!--categories-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objects Page -->
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:param name="pageTitle" value="Cuius Admin | Add Sub Category"/>
+            
+            <ui:define name="content">
+                <!-- Objects Page -->
+                <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Add DAO</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Second Level Categories
+                                </div>
+                                <div class="panel-body">
+                                            <!--sub category-->
+                                            <h:form>
+                                                <p:messages id="msg" closable="true" showDetail="true"/>
+                                                <p:panelGrid columns="2">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Add A Sub-Category"/>
+                                                    </f:facet>
+                                                    <h:outputLabel value="Select Category Name"/>
+                                                    <h:selectOneMenu value="#{subCategoryMB.catName}">
+                                                        <f:selectItem itemLabel="Select Category Name" itemValue=""/>
+                                                        <f:selectItems value="#{subCategoryMB.categoryName}"/>
+                                                    </h:selectOneMenu>
+                                                    <h:outputLabel value="Sub Category Name"/>
+                                                    <p:inputText value="#{subCategoryMB.subcat.subCatName}"/>
+                                                    <h:outputLabel value="Sub Category Description"/>
+                                                    <p:inputTextarea value="#{subCategoryMB.subcat.subCatDesc}"/>
+                                                    <p:commandButton value="Save" action="#{subCategoryMB.addSubCategory()}" update="msg"/>
+                                                </p:panelGrid>
+                                            </h:form>
+                                            <!--sub category-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objects Page -->
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

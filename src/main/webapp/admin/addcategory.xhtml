@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./template.xhtml">
+            
+            <ui:param name="pageTitle" value="Cuius Admin | Add Category"/>
+
+            <ui:define name="content">
+                <!-- Objects Page -->
+                <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Add DAO</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Store Categories
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <!--category-->
+                                            <h:form>
+                                                <p:messages id="msg" closable="true" showDetail="true"/>
+                                                <p:panelGrid columns="2">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Add A Category"/>
+                                                    </f:facet>
+                                                    <h:outputLabel value="Category Name"/>
+                                                    <p:inputText value="#{categoryMB.category.catName}"/>
+                                                    <h:outputLabel value="Category Description"/>
+                                                    <p:inputTextarea value="#{categoryMB.category.catDesc}"/>
+                                                    <p:commandButton value="Save" action="#{categoryMB.addCategory()}" update="msg"/>
+                                                </p:panelGrid>
+                                            </h:form>
+                                            <!--category-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objects Page -->
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Cuius | Fate Enterprises</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" media="all" href="../assets/fate/styles/960.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="../assets/fate/styles/reset.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="../assets/fate/styles/text.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="../assets/fate/style.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="../assets/fate/themes/brown/style.css" />
+
+    </h:head>
+    
+    <h:body>
+
+        <div id="warp">
+            <div id="main" class="container_16">
+                <div id="header" class="grid_16">
+                    <div id="logo" class="grid_4 alpha">
+                        <h1><p:link href="#">Fate Enterprises</p:link></h1>
+                        <h2>Fashion House</h2>
+                    </div>
+                    <div id="headright" class="grid_7 prefix_5 omega">
+                        <h3 class="login"><p:link href="../index.html">Cuius Online</p:link></h3>
+                    </div>
+                </div>
+                <div id="mainMenu" class="grid_16">
+                    <ul>
+                        <li><a href="#" class="aActive">Home</a></li>
+                        <li><a href="#">Clothes</a></li>
+                        <li><a href="#">Order &amp; Delivery</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div id="stickySearch" class="grid_16">
+                    <div class="stickyNews grid_12 alpha">
+                        <p>Valentine’s Fashion Trends Special Package. <em>Free Delivery.</em> <a href="#" class="bookMan">More &raquo;</a></p>
+                    </div>
+                    <div class="search grid_4 omega">
+                        <form action="#" method="get">
+                            <input type="text" value="Type your keyword" id="s" name="s" onfocus="if (this.value == 'Type your keyword') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Type your keyword';}" />
+                        </form>
+                    </div>
+                </div>
+                <div class="products grid_16">
+                    <div class="productsWarp">
+                        <ul>
+                            <li><a href="#"><img src="../assets/fate/images/1.jpg" alt="" width="938" height="398" /></a></li>
+                            <li><a href="#"><img src="../assets/fate/images/2.jpg" alt="" width="938" height="398" /></a></li>
+                            <li><a href="#"><img src="../assets/fate/images/3.jpg" alt="" width="938" height="398" /></a></li>
+                            <li><a href="#"><img src="../assets/fate/images/4.jpg" alt="" width="938" height="398" /></a></li>
+                            <li><a href="#"><img src="../assets/fate/images/5.jpg" alt="" width="938" height="398" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="productThumb grid_10 prefix_3 suffix_3">
+                    <ul>
+                        <li class="grid_2 alpha"><a href="#"><img src="../assets/fate/images/thumb1.jpg" alt="" width="100" height="60" /></a></li>
+                        <li class="grid_2"><a href="#"><img src="../assets/fate/images/thumb2.jpg" alt="" width="100" height="60" /></a></li>
+                        <li class="grid_2"><a href="#"><img src="../assets/fate/images/thumb1.jpg" alt="" width="100" height="60" /></a></li>
+                        <li class="grid_2"><a href="#"><img src="../assets/fate/images/thumb2.jpg" alt="" width="100" height="60" /></a></li>
+                        <li class="grid_2 omega"><a href="#"><img src="../assets/fate/images/thumb1.jpg" alt="" width="100" height="60" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+
+
+            <div class="prodMenu bodyContent products" style="background: #660000">
+                <h4>Fashion <a href="#" class="viewAll">View All &raquo;</a></h4>
+
+                <p:dataGrid var="product" value="#{displayProductMB.listProductsByMerchant(displayProductMB.selectedProduct.merchant.companyName)}" 
+                            layout="grid" columns="3" rows="9" pageLinks="4" paginator="true" paginatorPosition="bottom" 
+                            paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}" >
+
+                    <div class="menu grid_4 alpha">
+                        <p>
+                            <p:commandLink class="grid_4 alpha" action="#{searchProduct.clickedProduct()}" title="Full review">
+                                <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}"/>
+                                <h:graphicImage name="#{product.proPic1}" library="images" width="220" height="120"/>
+                            </p:commandLink><br/>
+                            <p:outputLabel value="#{product.proName}"/><br/>
+                            <p:outputLabel value="$#{product.proPrice}"/><br/>
+                            <p:outputLabel value="#{product.subCategory.subCatName}"/>
+
+                        </p>
+                    </div>
+
+                </p:dataGrid>
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="container_16">
+                <div class="copyright grid_16">
+                    <p class="left">Copyright &copy; 2019, <a href="www.cuius.co.zw" target="blank">Cuius Inc</a>, All Rights Reserved</p>
+                    <p class="right"><a href="www.cuius.co.zw/terms" target="blank">Terms of Service</a>  |  <a href="www.cuius.co.zw/privacy" target="blank">Privacy Policy</a></p>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+</div>
+
+   
+
+        <script type="text/javascript" src="../assets/fate/scripts/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="../assets/fate/scripts/jquery.tools.min.js"></script>
+<script type="text/javascript" src="../assets/fate/scripts/dapur.js"></script>
+    </h:body>
+</html>

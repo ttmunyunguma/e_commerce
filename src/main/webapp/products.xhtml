@@ -1,0 +1,644 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> <!--<![endif]-->
+    <h:head>
+        <title>Cuius | Products</title>
+        <!-- Meta -->
+	<meta charset="utf-8"/>
+        <meta http-equiv="Content-Type" content="text/html" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content=""/>
+	<meta name="author" content="Terrence Takunda Munyunguma"/>
+        
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico"/>
+
+	<!-- Web Fonts -->
+	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,800&amp;subset=cyrillic,latin'/>
+
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="assets/css/shop.style.css"/>
+
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet" href="assets/css/headers/header-v5.css"/>
+	<link rel="stylesheet" href="assets/css/footers/footer-v4.css"/>
+
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="assets/plugins/animate.css"/>
+	<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css"/>
+	<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css"/>
+	<link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css"/>
+	<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css"/>
+	<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css"/>
+	<link rel="stylesheet" href="assets/plugins/master-slider/masterslider/style/masterslider.css"/>
+	<link rel='stylesheet' href="assets/plugins/master-slider/masterslider/skins/default/style.css"/>
+        
+        <!-- Style Switcher -->
+	<link rel="stylesheet" href="assets/css/plugins/style-switcher.css"/>
+
+	<!-- CSS Theme -->
+        <link rel="stylesheet" href="assets/css/theme-colors/aqua.css" id="style_color"/>
+
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="assets/css/custom.css"/>
+    </h:head>
+    <h:body class="header-fixed">
+        <div class="wrapper">
+            
+            <!--=== Header v5 ===-->
+            <div class="header-v5 header-static">
+                <!-- Topbar v3 -->
+                <div class="topbar-v3">
+                    <h:form enctype="multipart/form-data">
+                        <div class="search-open">
+                            <div class="container input-group custom-search-form">
+                                <p:inputText class="form-control" a:placeholder="Type Keyword to Search Here... Then Press Enter" value="#{searchProduct.keyword}" />
+                                <span class="input-group-btn">
+                                    <p:commandButton action="#{searchProduct.searchedResults()}" style="visibility: hidden"/>
+                                </span>
+                                <div class="search-close"><i class="icon-close"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="search-open">
+                            <div class="container input-group custom-search-form">
+                                <p:fileUpload value="#{vGG16Layer.file}" mode="advanced" dragDropSupport="true" fileUploadListener="#{vGG16Layer.uploadImage}"
+                                              label="Select an Image" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" uploadLabel="Search" 
+                                               invalidFileMessage="You can only Search with an Image" update="messages" />
+                                <div class="search-close"><i class="icon-close"></i></div>
+                            </div>
+                        </div>
+                        <p:growl id="messages" showDetail="true" />
+                    </h:form>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- Topbar Navigation -->
+                                <ul class="left-topbar">
+                                    <li>
+                                        <a>Currency (USD)</a>
+                                        <ul class="currency">
+                                            <li class="active">
+                                                <a href="#">USD <i class="fa fa-check"></i></a>
+                                            </li>
+                                            <li><a href="#">Euro</a></li>
+                                            <li><a href="#">Pound</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a>Language (EN)</a>
+                                        <ul class="language">
+                                            <li class="active">
+                                                <a href="#">English (EN)<i class="fa fa-check"></i></a>
+                                            </li>
+                                            <li><a href="#">Spanish (SPN)</a></li>
+                                            <li><a href="#">Russian (RUS)</a></li>
+                                            <li><a href="#">German (GRM)</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p:link outcome="/admin/index.xhtml" value="Admin"/>
+                                    </li>
+                                </ul><!--/end left-topbar-->
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-inline right-topbar pull-right">
+                                    <li><a href="#">Account</a></li>
+                                    <li><a href="#">Wishlist</a></li>
+                                    <li><p:link outcome="login.xhtml" value="Login" rendered="#{!accountBean.loggedIn}"/> | <p:link outcome="register.xhtml" value="Register" rendered="#{!accountBean.loggedIn}"/></li>
+                                    <li><p:outputLabel value="Hie #{accountBean.user.firstName}" rendered="#{accountBean.loggedIn}"/> | <p:commandLink value="Logout" action="#{accountBean.logout}" rendered="#{accountBean.loggedIn}"/></li>
+                                    <li><i class="search fa fa-search search-button"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!--/container-->
+                </div>
+                <!-- End Topbar v3 -->
+
+                <!-- Navbar -->
+                <div class="navbar navbar-default mega-menu" role="navigation">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="index.xhtml">
+                                <h:graphicImage id="logo-header" url="/assets/img/logo.png" alt="Cuius" height="50"/>
+                            </a>
+                        </div>
+
+                        <!-- Shopping Cart -->
+                        <div class="shop-badge badge-icons pull-right">
+                            <h:form id="shopping_cart_form">
+                                <h:outputLink value="checkout.xhtml"><i class="fa fa-shopping-cart"/></h:outputLink>
+                                <span class="badge badge-sea rounded-x"><h:outputText value="#{shoppingCartBean.cartSize}" id="cartIcon"/></span>
+                                <div class="badge-open">
+                                    <ul class="list-unstyled mCustomScrollbar" data-mcs-theme="minimal-dark">
+                                        <p:dataList id="scart" value="#{shoppingCartBean.cartItems}" var="cart">
+                                            <h:graphicImage name="#{cart.item.proPic1}" library="images" width="50" height="50"/>
+                                            <div class="overflow-h">
+                                                <small><h:outputText value="$#{cart.item.proPrice}"/></small>
+                                            </div>
+                                        </p:dataList>
+                                    </ul>
+                                    <div class="subtotal">
+                                        <div class="overflow-h margin-bottom-10">
+                                            <span>Subtotal</span>
+                                            <span class="pull-right subtotal-cost"><h:outputLabel value="$#{shoppingCartBean.total}"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <p:commandLink value="Update Cart" action="#{shoppingCartBean.updateQuantity()}" ajax="false" class="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block"/>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <p:commandLink value="Checkout" class="btn-u btn-u-sea-shop btn-block" action="#{shoppingCartBean.checkOut()}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                        <!-- End Shopping Cart -->
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-responsive-collapse">
+                            <!-- Nav Menu -->
+                            <ul class="nav navbar-nav">
+                                <!-- Store -->
+                                <li class="dropdown mega-menu-fullwidth">
+                                    <p:link outcome="allproducts.xhtml" class="dropdown-toggle">CATALOG</p:link>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="mega-menu-content">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">mobile</h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">computers</h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">Accessories</h3>
+                                                            <h3 class="mega-menu-heading">
+                                                                servers<span class="label label-danger-shop">GPU powered</span>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">Technology</h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">Software</h3>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading">Professional Services</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End Store -->
+                                
+                                <!-- Promotion -->
+                                <li class="dropdown">
+                                    <a href="allproducts.xhtml" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                                        Promotions
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">Broadband</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Wifi</a></li>
+                                                <li><a href="#">LAN</a></li>
+                                                <li><a href="#">Fibre</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">Voice</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">VPN</a></li>
+                                                <li><a href="#">Teleconf</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End Promotion -->
+
+                                <!-- Gifts -->
+                                <li class="dropdown mega-menu-fullwidth">
+                                    <a href="allproducts.xhtml" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                                        Gifts
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="mega-menu-content">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-12 col-xs-12 md-margin-bottom-30">
+                                                            <h3 class="mega-menu-heading">Cuius Gift Program</h3>
+                                                            <p>In conjuction with the TelOne group, we are happy to give back to the community that has been supporting us for the pas...</p>
+                                                            <button type="button" class="btn-u btn-u-dark">Read More</button>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-4 col-xs-4 md-margin-bottom-30">
+                                                            <a href="allproducts.xhtml"><h:graphicImage class="product-offers img-responsive" value="assets/img/blog/01.jpg" alt="gift1"/></a>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-4 col-xs-4 sm-margin-bottom-30">
+                                                            <a href="allproducts.xhtml"><h:graphicImage class="product-offers img-responsive" value="assets/img/blog/02.jpg" alt="gift2"/></a>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-4 col-xs-4">
+                                                            <a href="allproducts.xhtml"><h:graphicImage class="product-offers img-responsive" value="assets/img/blog/03.jpg" alt="gift3"/></a>
+                                                        </div>
+                                                    </div><!--/end row-->
+                                                </div><!--/end container-->
+                                            </div><!--/end mega menu content-->
+                                        </li>
+                                    </ul><!--/end dropdown-menu-->
+                                </li>
+                                <!-- End Gifts -->
+
+                                <!-- Data -->
+                                <li class="dropdown">
+                                    <a href="allproducts.xhtml" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="1000">
+                                        Data
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">LAN</a></li>
+                                        <li><a href="#">Wifi</a></li>
+                                        <li><a href="#">Fibre</a></li>
+                                    </ul>
+                                </li>
+                                <!-- End Data -->
+                            </ul>
+                            <!-- End Nav Menu -->
+                        </div>
+                    </div>
+                </div>
+                <!-- End Navbar -->
+            </div>
+            <!--=== End Header v5 ===-->
+            
+            <!--=== Shop Product ===-->
+            <div class="shop-product">
+                <!-- Breadcrumbs v5 -->
+                <div class="container">
+                    <ul class="breadcrumb-v5">
+                        <li><p:link outcome="index.xhtml"><i class="fa fa-home"></i></p:link></li>
+                        <li><p:link outcome="allproducts.xhtml">Products</p:link></li>
+                        <li class="active"><h:outputText value="#{displayProductMB.selectedProduct.subCategory.subCatName}"/></li>
+                    </ul>
+                </div>
+                <!-- End Breadcrumbs v5 -->
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 md-margin-bottom-50">
+                            <div class="ms-showcase2-template">
+                                <!-- Master Slider -->
+                                <div class="master-slider ms-skin-default" id="masterslider">
+                                    <div class="ms-slide">
+                                        <h:graphicImage name="#{displayProductMB.selectedProduct.proPic1}" library="images" class="ms-brd"/>
+                                        <h:graphicImage name="#{displayProductMB.selectedProduct.proPic1}" library="images" class="ms-thumb"/>
+                                    </div>
+                                    <div class="ms-slide">
+                                        <img src="assets/img/blank.gif" data-src="assets/img/blog/29.jpg" alt="lorem ipsum dolor sit"/>
+                                        <img class="ms-thumb" src="assets/img/blog/29.jpg" alt="thumb"/>
+                                    </div>
+                                    <div class="ms-slide">
+                                        <img src="assets/img/blank.gif" data-src="assets/img/blog/30.jpg" alt="lorem ipsum dolor sit"/>
+                                        <img class="ms-thumb" src="assets/img/blog/30.jpg" alt="thumb"/>
+                                    </div>
+                                </div>
+                                <!-- End Master Slider -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="shop-product-heading">
+                                <h2><h:outputText value="#{displayProductMB.selectedProduct.proName}" /></h2>
+                                <ul class="list-inline shop-product-social">
+                                    <li>Vendor: <p:commandLink action="#{searchProduct.merchantProducts()}" value="#{displayProductMB.selectedProduct.merchant.companyName}"/></li>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </div><!--/end shop product social-->
+
+                            <ul class="list-inline product-ratings margin-bottom-30">
+                                <li><i class="rating-selected fa fa-star"></i></li>
+                                <li><i class="rating-selected fa fa-star"></i></li>
+                                <li><i class="rating-selected fa fa-star"></i></li>
+                                <li><i class="rating fa fa-star"></i></li>
+                                <li><i class="rating fa fa-star"></i></li>
+                                <li class="product-review-list">
+                                    <span>(1) <a href="#">Review</a> | <a href="#"> Add Review</a></span>
+                                </li>
+                            </ul><!--/end shop product ratings-->
+
+                            <p><h:outputText value="#{displayProductMB.selectedProduct.proDesc}" /></p><br/>
+
+                            <ul class="list-inline shop-product-prices margin-bottom-30">
+                                <li class="shop-red"><h:outputText value="$#{displayProductMB.selectedProduct.proPrice}" /></li>
+                                <li class="line-through"><h:outputText value="$#{displayProductMB.selectedProduct.proPrice + 70}" /></li>
+                                <li><small class="shop-bg-red time-day-left">4 days left</small></li>
+                            </ul><!--/end shop product prices-->
+
+                            <h3 class="shop-product-title">Color</h3>
+                            <ul class="list-inline product-color margin-bottom-30">
+                                <li>
+                                    <input type="radio" id="color-1" name="color"/>
+                                    <label class="color-one" for="color-1"></label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="color-2" name="color"/>
+                                    <label class="color-two" for="color-2"></label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="color-3" name="color"/>
+                                    <label class="color-three" for="color-3"></label>
+                                </li>
+                            </ul><!--/end product color-->
+
+                            <h3 class="shop-product-title">Quantity</h3>
+                            <div class="margin-bottom-40">
+                                <form name="f1" class="product-quantity sm-margin-bottom-20">
+                                    <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty();' value='-'>-</button>
+                                    <input type='text' class="quantity-field" name='qty' value="1" id='qty'/>
+                                    <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty").value++;' value='+'>+</button>
+                                </form>
+                                <h:form id="form">
+                                    <p:growl showDetail="true" id="growl"/>
+                                    <p:commandButton value="Add To Cart" action="#{shoppingCartBean.addToCart(displayProductMB.selectedProduct)}" update=":shopping_cart_form:cartIcon :shopping_cart_form:scart :form:growl" class="btn-u btn-u-sea-shop btn-u-lg">
+                                        <f:setPropertyActionListener target="#{cartHandlerMB.productId}" value="#{product.proId}"/>
+                                        <f:setPropertyActionListener target="#{cartHandlerMB.productName}" value="#{product.proName}"/>
+                                        <f:setPropertyActionListener target="#{cartHandlerMB.price}" value="#{product.proPrice}"/>
+                                    </p:commandButton>
+                                </h:form>
+                            </div><!--/end product quantity-->
+
+                            <ul class="list-inline add-to-wishlist add-to-wishlist-brd">
+                                <li class="wishlist-in">
+                                    <i class="fa fa-heart"></i>
+                                    <a href="#">Add to Wishlist</a>
+                                </li>
+                                <li class="compare-in">
+                                    <i class="fa fa-exchange"></i>
+                                    <a href="#">Add to Compare</a>
+                                </li>
+                            </ul>
+                            <p class="wishlist-category"><strong>Categories:</strong> <a href="#">Smart tech</a> <a href="#">Watches</a></p>
+                        </div>
+                    </div><!--/end row-->
+                </div>
+            </div>
+            <!--=== End Shop Product ===-->
+            
+            <!--=== Content Medium ===-->
+            <div class="content-md container">
+                <!--=== Product Service ===-->
+                <div class="row margin-bottom-60">
+                    <div class="col-md-4 product-service md-margin-bottom-30">
+                        <div class="product-service-heading">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                        <div class="product-service-in">
+                            <h3>Free Delivery</h3>
+                            <p>All purchases made on the Cuius platform eill be delivered to your doorstep free of charge...</p>
+                            <a href="#">+Read More</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 product-service md-margin-bottom-30">
+                        <div class="product-service-heading">
+                            <i class="icon-earphones-alt"></i>
+                        </div>
+                        <div class="product-service-in">
+                            <h3>Customer Service</h3>
+                            <p>If you have any enquiries about our services and how we work, our customer support team is on standby just for you...</p>
+                            <a href="#">+Read More</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 product-service">
+                        <div class="product-service-heading">
+                            <i class="icon-refresh"></i>
+                        </div>
+                        <div class="product-service-in">
+                            <h3>Free Returns</h3>
+                            <p>Problems with the product we shipped to you? Its not a hustle, We will not charge you for the return...</p>
+                            <a href="#">+Read More</a>
+                        </div>
+                    </div>
+                </div><!--/end row-->
+                <!--=== End Product Service ===-->
+
+            </div><!--/end container-->
+            <!--=== End Content Medium ===-->
+            
+            <!--=== Illustration v2 ===-->
+            <div class="container">
+                <div class="heading heading-v1 margin-bottom-20">
+                    <h2>You may also like</h2>
+                    <p>This recommendation is based on the products you searched and viewed</p>
+                </div>
+
+                <div class="illustration-v2 margin-bottom-60">
+                    <div class="customNavigation margin-bottom-25">
+                        <a class="owl-btn prev rounded-x"><i class="fa fa-angle-left"></i></a>
+                        <a class="owl-btn next rounded-x"><i class="fa fa-angle-right"></i></a>
+                    </div>
+
+                    <h:form id="recomended_products_form">
+                        <p:growl id="growl" showDetail="true" />
+                        <ul class="list-inline owl-slider-v4">
+                            <ui:repeat value="#{displayProductMB.randomProducts}" var="product">
+                                <li class="item">
+                                    <p:commandLink action="#{searchProduct.clickedProduct()}" title="Full review">
+                                        <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}"/>
+                                        <h:graphicImage name="#{product.proPic1}" library="images" class="img-responsive"/>
+                                    </p:commandLink>
+                                    <div class="product-description-v2">
+                                        <div class="margin-bottom-5">
+                                            <h4 class="title-price">
+                                                <p:commandLink value="#{product.proName}" action="#{searchProduct.clickedProduct()}">
+                                                    <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}"/>
+                                                </p:commandLink>
+                                            </h4>
+                                            <span class="title-price"><h:outputText value="$#{product.proPrice}"/></span>
+                                        </div>
+                                        <ul class="list-inline product-ratings">
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating fa fa-star"></i></li>
+                                            <li><i class="rating fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ui:repeat>
+                        </ul>
+                    </h:form>
+                </div>
+            </div>
+            <!--=== End Illustration v2 ===-->
+            
+            <!--=== Shop Suvbscribe ===-->
+            <div class="shop-subscribe">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 md-margin-bottom-20">
+                            <h2>subscribe to our weekly <strong>newsletter</strong></h2>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Email your email..."/>
+                                <span class="input-group-btn">
+                                    <button class="btn" type="button"><i class="fa fa-envelope-o"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/end container-->
+            </div>
+            <!--=== End Shop Suvbscribe ===-->
+            
+            <!--=== Footer v4 ===-->
+            <div class="footer-v4">
+                <div class="footer">
+                    <div class="container">
+                        <div class="row">
+                            <!-- About -->
+                            <div class="col-md-4 md-margin-bottom-40">                               
+                                <a href="index.xhtml"><h:graphicImage id="logo-footer" class="footer-logo" url="/assets/img/logo2.png" alt="Cuius"/></a>
+                                <p>Cuius regio, eius religio <br/> Whose realm, His religion</p>
+                                
+                            </div>
+                            <!-- End About -->
+
+                            <!-- Simple List -->
+                            <div class="col-md-2 col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-6">
+                                        <h2 class="thumb-headline">T<small>s</small> &amp; C<small>s</small></h2>
+                                    </div>
+
+                                    <div class="col-sm-12 col-xs-6">
+                                        <h2 class="thumb-headline">Teams</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-6">
+                                        <h2 class="thumb-headline">Utilities</h2>
+                                    </div>
+
+                                    <div class="col-sm-12 col-xs-6">
+                                        <h2 class="thumb-headline">Documentation</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 md-margin-bottom-40">
+                                <div class="row">
+                                    <ul class="list-unstyled address-list margin-bottom-20">
+                                    <li><i class="fa fa-angle-right"></i>Mendel Road Avondale, Harare, Zimbabwe </li>
+                                    <li><i class="fa fa-angle-right"></i>Phone: +263 71 3 99 4446</li>
+                                    <li><i class="fa fa-angle-right"></i>Fax: 263 71 3 99 4446</li>
+                                    <li><i class="fa fa-angle-right"></i>Email: info@cuius.com</li>
+                                </ul>
+
+                                <ul class="list-inline shop-social">
+                                    <li><a href="https://facebook.com/cuiuszw" target="blank"><i class="fb rounded-md fa fa-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/cuiuszw"><i class="tw rounded-md fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="gp rounded-md fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="yt rounded-md fa fa-youtube"></i></a></li>
+                                </ul>
+                                </div>
+                            </div>
+                            <!-- End Simple List -->
+                        </div><!--/end row-->
+                    </div><!--/end continer-->
+                </div><!--/footer-->
+
+                <div class="copyright">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>
+                                    2019 &copy; <a href="http://www.cuius.co.zw/" target="blank">Cuius Inc.</a>. ALL Rights Reserved.
+                                     | <a href="http://www.cuius.co.zw/privacy" target="blank">Privacy Policy</a> | <a href="http://www.cuius.co.zw/terms" target="blank">Terms of Service</a>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-inline sponsors-icons pull-right">
+                                    <li><i class="fa fa-cc-paypal"></i></li>
+                                    <li><i class="fa fa-cc-visa"></i></li>
+                                    <li><i class="fa fa-cc-mastercard"></i></li>
+                                    <li><i class="fa fa-cc-discover"></i></li>
+                                    <li><i class="fa fa-cc-stripe"></i></li>
+                                    <li><i class="fa fa-cc-amex"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/copyright-->
+            </div>
+            <!--=== End Footer v4 ===-->
+            
+        </div>
+        
+        <!-- JS Global Compulsory -->
+	<script src="assets/plugins/jquery/jquery.min.js"></script>
+	<script src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<!-- JS Implementing Plugins -->
+	<script src="assets/plugins/back-to-top.js"></script>
+	<script src="assets/plugins/smoothScroll.js"></script>
+	<script src="assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<!-- Master Slider -->
+	<script src="assets/plugins/master-slider/masterslider/masterslider.min.js"></script>
+	<script src="assets/plugins/master-slider/masterslider/jquery.easing.min.js"></script>
+	<!-- JS Customization -->
+	<script src="assets/js/custom.js"></script>
+	<!-- JS Page Level -->
+	<script src="assets/js/shop.app.js"></script>
+	<script src="assets/js/plugins/owl-carousel.js"></script>
+	<script src="assets/js/plugins/master-slider.js"></script>
+	<script src="assets/js/forms/product-quantity.js"></script>
+	<script src="assets/js/plugins/style-switcher.js"></script>
+        <script>
+                jQuery(document).ready(function() {
+                        App.init();
+                        App.initScrollBar();
+                        OwlCarousel.initOwlCarousel();
+                        StyleSwitcher.initStyleSwitcher();
+                        MasterSliderShowcase2.initMasterSliderShowcase2();
+                });
+        </script>
+
+        <!--[if lt IE 9]>
+	<script src="assets/plugins/respond.js"></script>
+	<script src="assets/plugins/html5shiv.js"></script>
+	<script src="assets/js/plugins/placeholder-IE-fixes.js"></script>
+	<![endif]-->
+    </h:body>
+</html>
+

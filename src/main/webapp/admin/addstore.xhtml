@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:param name="pageTitle" value="Cuius Admin | Add Store"/>
+            
+            <ui:define name="content">
+                
+                <!-- Objects Page -->
+                <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Add Stores</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Product Level Objects
+                                </div>
+                                <div class="panel-body">
+                                    <!--product-->
+                                    <h:form enctype="multipart/form-data">
+                                        <p:growl id="msg" sticky="true" showDetail="true"/>
+                                        <p:panelGrid columns="2">
+                                            <f:facet name="header">
+                                                <h:outputText value="Add A Merchant Store"/>
+                                            </f:facet>
+                                            
+                                            <h:outputLabel value="Select Merchant Name"/>
+                                            <h:selectOneMenu value="#{storeMB.merchantname}">
+                                                <f:selectItem itemLabel="Select A Merchant" itemValue=""/>
+                                                <f:selectItems value="#{merchantMB.listMerchants}"/>
+                                            </h:selectOneMenu>
+                                            <h:outputLabel value="Store Name"/>
+                                            <p:inputText value="#{storeMB.store.storeName}"/>
+                                            <h:outputLabel value="Address"/>
+                                            <p:inputTextarea value="#{storeMB.store.address}"/>
+                                            <h:outputLabel value="Latitude"/>
+                                            <p:inputText value="#{storeMB.store.latitude}"/>
+                                            <h:outputLabel value="Longitude"/>
+                                            <p:inputText value="#{storeMB.store.longitude}"/>
+                                            <h:outputLabel value="Store Type"/>
+                                            <p:inputText value="#{storeMB.store.storeType}" placeholder="e.g Pet Store / Clothing Store"/>
+                                            <h:outputLabel value="Color Code"/>
+                                            <p:inputText value="#{storeMB.store.colorCode}" placeholder="#00FF00" size="7"/>
+                                            
+                                            <p:commandButton value="Save" action="#{storeMB.addStore()}" update="msg" ajax="false"/>
+                                        </p:panelGrid>
+                                    </h:form>
+                                    <!--product-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objects Page -->
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

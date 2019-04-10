@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2019 7:12:28 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cuius.web.cuius_web.entity.Customers" table="customers" catalog="project_cuius" optimistic-lock="version">
+        <id name="customerId" type="java.lang.Integer">
+            <column name="customer_id" />
+            <generator class="identity" />
+        </id>
+        <property name="userId" type="int">
+            <column name="user_id" not-null="true" />
+        </property>
+        <property name="billingAddress" type="string">
+            <column name="billing_address" length="1000" not-null="true" />
+        </property>
+        <property name="shippingAddress" type="string">
+            <column name="shipping_address" length="1000" not-null="true" />
+        </property>
+        <set name="productOrders" table="product_order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <one-to-many class="com.cuius.web.cuius_web.entity.ProductOrder" />
+        </set>
+    </class>
+</hibernate-mapping>

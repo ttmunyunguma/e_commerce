@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2019 7:12:28 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cuius.web.cuius_web.entity.Merchant" table="merchant" catalog="project_cuius" optimistic-lock="version">
+        <id name="merchantId" type="java.lang.Integer">
+            <column name="merchant_id" />
+            <generator class="identity" />
+        </id>
+        <property name="companyName" type="string">
+            <column name="company_name" length="1000" not-null="true" />
+        </property>
+        <property name="contactName" type="string">
+            <column name="contact_name" length="1000" not-null="true" />
+        </property>
+        <property name="companyAddress" type="string">
+            <column name="company_address" length="1000" not-null="true" />
+        </property>
+        <property name="companyPhone" type="string">
+            <column name="company_phone" length="1000" not-null="true" />
+        </property>
+        <property name="companyEmail" type="string">
+            <column name="company_email" length="1000" not-null="true" />
+        </property>
+        <property name="companyLogo" type="string">
+            <column name="company_logo" length="100" not-null="true" />
+        </property>
+        <set name="products" table="product" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="merchant_id" not-null="true" />
+            </key>
+            <one-to-many class="com.cuius.web.cuius_web.entity.Product" />
+        </set>
+    </class>
+</hibernate-mapping>

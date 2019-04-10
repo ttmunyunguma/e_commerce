@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Created Mar 01, 2019 9:23:28 AM by Terrence Takunda Munyunguma -->
+
+<hibernate-mapping>
+    <class name="com.cuius.web.cuius_web.entity.Country" table="country" catalog="project_cuius" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+        </id>
+        <property name="isoCode" type="string">
+            <column name="iso_code" length="10" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="50" not-null="true" />
+        </property>
+        <property name="printableName" type="string">
+            <column name="printable_name" length="50" not-null="true" />
+        </property>
+        <property name="iso3" type="string">
+            <column name="iso3" length="10" not-null="true" />
+        </property>
+        <property name="numcode" type="string">
+            <column name="numcode" length="10" not-null="true" />
+        </property>
+        <property name="version" type="int">
+            <column name="version" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

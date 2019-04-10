@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:gis="http://gisfaces.com" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template="./template.xhtml">
+            
+            <ui:param name="pageTitle" value="Cuius Admin | Platform Users"/>
+
+            <ui:define name="content">
+                
+                <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Users Location</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Live Users Now
+                                </div>
+                                <h:form style="height:100%;">
+
+                                    <p:growl id="growl" showSummary="true" showDetail="true"></p:growl>
+                                    
+                                    <h:panelGroup id="panel1" layout="block" styleClass="gisfacesMapPanel"></h:panelGroup>
+                                    <gis:map mapPanel="panel1" background="streets" latitude="-17.7833185" longitude="31.050406" zoom="5">
+                                        
+                                        <!--<gis:service id="dams" type="dynamic" url="https://maps.bts.dot.gov/services/rest/services/NTAD/Dams/MapServer"></gis:service>-->
+                                        
+                                        <gis:service id="population" type="dynamic" url="https://maps.bts.dot.gov/services/rest/services/NTAD/Populated_Places/MapServer"></gis:service>
+                                        
+                                        
+                                        <f:ajax event="click" listener="#{mapBean.doMapClickListener}" render="growl"></f:ajax>
+                                        <f:ajax event="extent" listener="#{mapBean.doMapExtentListener}" render="growl"></f:ajax>
+                                        <f:ajax event="view" listener="#{mapBean.doMapGraphicViewListener}" render="growl"></f:ajax>
+                                        <f:ajax event="action" listener="#{mapBean.doMapGraphicActionListener}" render="growl"></f:ajax>
+                                        <f:ajax event="geolocation" listener="#{mapBean.doMapGeoLocationListener}" render="growl"></f:ajax>
+                                    </gis:map>
+
+                            <!--<h:panelGroup id="panel1" layout="block" styleClass="gisfacesMapPanel" rendered="#{geoLocationBean.event != null}"></h:panelGroup>
+                                    <gis:map mapPanel="panel1" background="streets" latitude="#{geoLocationBean.event.latitude}" longitude="#{geoLocationBean.event.longitude}" zoom="6">
+                                        <gis:service type="graphics" model="#{mapBean.userGraphicsModel}"></gis:service>
+                                    </gis:map>
+                                    <gis:geolocation id="geolocation1" watch="#{geoLocationBean.watch}" accuracy="#{geoLocationBean.accuracy}" timeout="#{geoLocationBean.timeout}" maximumAge="#{geoLocationBean.maximumAge}">
+                                        <f:ajax listener="#{geoLocationBean.doGeoLocationListener}"></f:ajax>
+                                    </gis:geolocation>-->
+                                    
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+            
+        </ui:composition>
+
+    </h:body>
+</html>
