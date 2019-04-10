@@ -392,7 +392,7 @@ public class MapBean implements Serializable {
 //        marker.setType(stores.getAllStores().getStoreType());
         marker.getAttributes().put("Address", address);
 //        marker.setFillColor(stores.getAllStores().getColorCode());
-        mCaarker.setFillOpacity(0.75);
+        marker.setFillOpacity(0.75);
         marker.setDraggable(false);
 
         return marker;
