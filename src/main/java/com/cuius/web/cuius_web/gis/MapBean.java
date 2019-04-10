@@ -368,7 +368,7 @@ public class MapBean implements Serializable {
         List<Graphic> graphics = this.starbucksGraphicsModel.getGraphics();
         
         
-        graphics.addAll(buildStarbucksMarker(stores.getAllStores().getLatitude(), stores.getAllStores().getLongitude(), stores.getAllStores().getStoreName(), stores.getAllStores().getAddress()));
+//        graphics.addAll(buildStarbucksMarker(stores.getAllStores().getLatitude(), stores.getAllStores().getLongitude(), stores.getAllStores().getStoreName(), stores.getAllStores().getAddress()));
         
     }
     
@@ -389,10 +389,10 @@ public class MapBean implements Serializable {
         SvgMarkerGraphic marker = new SvgMarkerGraphic();
         marker.setCoordinate(new Coordinate(latitude, longitude));
         marker.setId(store);
-        marker.setType(stores.getAllStores().getStoreType());
+//        marker.setType(stores.getAllStores().getStoreType());
         marker.getAttributes().put("Address", address);
-        marker.setFillColor(stores.getAllStores().getColorCode());
-        marker.setFillOpacity(0.75);
+//        marker.setFillColor(stores.getAllStores().getColorCode());
+        mCaarker.setFillOpacity(0.75);
         marker.setDraggable(false);
 
         return marker;
