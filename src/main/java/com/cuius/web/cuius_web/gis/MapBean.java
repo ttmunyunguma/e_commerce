@@ -96,8 +96,6 @@ public class MapBean implements Serializable {
     private GraphicsModel graphicsModel;
     private GraphicsModel starbucksGraphicsModel;
     private GraphicsModel userGraphicsModel;
-    private Store shops = (Store) stores.getAllStores();
-
         
     /**
      * Creates a new instance of MapBean
@@ -369,10 +367,13 @@ public class MapBean implements Serializable {
         this.starbucksGraphicsModel.setName("Stores");
 
         List<Graphic> graphics = this.starbucksGraphicsModel.getGraphics();
-        
-        //use collections
-        graphics.addAll((Collection<? extends Graphic>) buildStarbucksMarker(shops.getLatitude(), shops.getLongitude(), shops.getStoreName(), shops.getAddress()));
-        
+
+        List<Store> list = stores.getAllStores();
+        for(int i = 0; i<list.size(); i++) {
+
+            Store shop = list.get(i);
+            graphics.add(buildStarbucksMarker(shop.getLatitude(), shop.getLongitude(), shop.getStoreName(), shop.getAddress(), shop.getStoreType(), shop.getColorCode()));
+        }
     }
     
     //method to locate users by marker
@@ -388,19 +389,19 @@ public class MapBean implements Serializable {
     }
     
     //this method builds markers fore the stores
-    private SvgMarkerGraphic buildStarbucksMarker(double latitude, double longitude, String store, String address) {
+    private SvgMarkerGraphic buildStarbucksMarker(double latitude, double longitude, String store, String address, String type, String color) {
         SvgMarkerGraphic marker = new SvgMarkerGraphic();
         marker.setCoordinate(new Coordinate(latitude, longitude));
-        marker.setId(shops.getStoreType());
+        marker.setId(type);
         marker.setType(store);
         marker.getAttributes().put("Address", address);
-        marker.setFillColor(shops.getColorCode());
+        marker.setFillColor(color);
         marker.setFillOpacity(0.75);
         marker.setDraggable(false);
 
         return marker;
     }
-    
+
     //helper method for the marker of geolocated users
     
     private SvgMarkerGraphic buildUsersMarker(double latitude, double longitude, String user, String address) {

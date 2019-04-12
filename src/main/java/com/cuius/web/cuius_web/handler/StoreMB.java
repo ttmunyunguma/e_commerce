@@ -79,7 +79,7 @@ public class StoreMB implements Serializable {
     
     public List<Store> getAllStores(){
 
-        return (List<Store>) new ListDao().allStoresList();
+        return new ListDao().allStoresList();
     }
     
     

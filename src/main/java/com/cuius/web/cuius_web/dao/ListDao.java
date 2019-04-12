@@ -227,7 +227,7 @@ public class ListDao {
     }
     
     //returns everything from the Stores Table
-    public List allStoresList(){
+    public List<Store> allStoresList(){
         
         Session session = factory.openSession();
         List<Store> store = session.createQuery("SELECT a1 FROM Store a1").setCacheable(true).getResultList();

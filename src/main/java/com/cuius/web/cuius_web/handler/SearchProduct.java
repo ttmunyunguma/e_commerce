@@ -95,19 +95,26 @@ public class SearchProduct implements Serializable{
     }
     
     public void merchantProducts(){
-        try {
 
-            switch (String.valueOf(mb.getSelectedProduct().getMerchant().getCompanyName())) {
-                
-                case "Fate Enterprises":            
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("./stores/fate.xhtml");
-                case "TelOne":            
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("./stores/telone.xhtml");    
-                default:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("allproducts.xhtml");
-            }
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("stores.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(SearchProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+//        try {
+//
+//            switch (String.valueOf(mb.getSelectedProduct().getMerchant().getCompanyName())) {
+//
+//                case "Fate Enterprises":
+//                    FacesContext.getCurrentInstance().getExternalContext().redirect("./stores/fate.xhtml");
+//                case "TelOne":
+//                    FacesContext.getCurrentInstance().getExternalContext().redirect("./stores/telone.xhtml");
+//                default:
+//                    FacesContext.getCurrentInstance().getExternalContext().redirect("allproducts.xhtml");
+//            }
+//        } catch (IOException ex) {
+//            Logger.getLogger(SearchProduct.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }
