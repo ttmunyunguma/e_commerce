@@ -24,6 +24,7 @@ import com.cuius.web.cuius_web.entity.Store;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -77,9 +78,8 @@ public class StoreMB implements Serializable {
     }
     
     public List<Store> getAllStores(){
-        List<Store> inStore = new ListDao().allStoresList();
-        
-        return inStore;
+
+        return (List<Store>) new ListDao().allStoresList();
     }
     
     

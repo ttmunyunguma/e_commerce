@@ -17,6 +17,7 @@
  */
 package com.cuius.web.cuius_web.gis;
 
+import com.cuius.web.cuius_web.entity.Store;
 import com.cuius.web.cuius_web.handler.StoreMB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -27,6 +28,7 @@ import javax.faces.model.SelectItem;
 
 import java.io.Serializable;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +64,18 @@ import javax.inject.Inject;
 @Named(value = "mapBean")
 @SessionScoped
 public class MapBean implements Serializable {
-    
+
+    // ======================================
+    // =        Injection Points            =
+    // ======================================
+
+    @Inject
+    GeoLocationBean location;
+
+    @Inject
+    StoreMB stores;
+
+
     // ======================================
     // =             Attributes             =
     // ======================================
@@ -83,18 +96,8 @@ public class MapBean implements Serializable {
     private GraphicsModel graphicsModel;
     private GraphicsModel starbucksGraphicsModel;
     private GraphicsModel userGraphicsModel;
+    private Store shops = (Store) stores.getAllStores();
 
-    
-    // ======================================
-    // =        Injection Points            =
-    // ======================================
-    
-    @Inject
-    GeoLocationBean location;
-    
-    @Inject
-    StoreMB stores;
-    
         
     /**
      * Creates a new instance of MapBean
@@ -367,8 +370,8 @@ public class MapBean implements Serializable {
 
         List<Graphic> graphics = this.starbucksGraphicsModel.getGraphics();
         
-        
-//        graphics.addAll(buildStarbucksMarker(stores.getAllStores().getLatitude(), stores.getAllStores().getLongitude(), stores.getAllStores().getStoreName(), stores.getAllStores().getAddress()));
+        //use collections
+        graphics.addAll((Collection<? extends Graphic>) buildStarbucksMarker(shops.getLatitude(), shops.getLongitude(), shops.getStoreName(), shops.getAddress()));
         
     }
     
@@ -388,10 +391,10 @@ public class MapBean implements Serializable {
     private SvgMarkerGraphic buildStarbucksMarker(double latitude, double longitude, String store, String address) {
         SvgMarkerGraphic marker = new SvgMarkerGraphic();
         marker.setCoordinate(new Coordinate(latitude, longitude));
-        marker.setId(store);
-//        marker.setType(stores.getAllStores().getStoreType());
+        marker.setId(shops.getStoreType());
+        marker.setType(store);
         marker.getAttributes().put("Address", address);
-//        marker.setFillColor(stores.getAllStores().getColorCode());
+        marker.setFillColor(shops.getColorCode());
         marker.setFillOpacity(0.75);
         marker.setDraggable(false);
 

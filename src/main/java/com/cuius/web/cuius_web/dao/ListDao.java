@@ -25,6 +25,8 @@ import com.cuius.web.cuius_web.entity.Product;
 import com.cuius.web.cuius_web.entity.Store;
 import com.cuius.web.cuius_web.entity.SubCategory;
 import com.cuius.web.cuius_web.util.HibernateUtil;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import org.hibernate.Session;
@@ -216,7 +218,7 @@ public class ListDao {
         
         Session session = factory.openSession();
         
-        Query query = session.createQuery("from Product p").setCacheable(true);
+        Query query = session.createQuery("FROM Product p").setCacheable(true);
         query.setFirstResult(random.nextInt(10));
         query.setMaxResults(6);
         List<Product> result = query.list();
@@ -229,7 +231,7 @@ public class ListDao {
         
         Session session = factory.openSession();
         List<Store> store = session.createQuery("SELECT a1 FROM Store a1").setCacheable(true).getResultList();
-        store.toString();
+
         return store;
     }
     
