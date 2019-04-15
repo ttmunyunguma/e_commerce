@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>Cuius | Vendors</title>
-
+    <title>Cuius | Account | User</title>
     <!-- Meta -->
     <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Terrence Takunda Munyunguma"/>
@@ -21,11 +22,12 @@
     <link rel="shortcut icon" href="favicon.ico"/>
 
     <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'/>
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,800&amp;subset=cyrillic,latin'/>
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/shop.style.css"/>
+    <link rel="stylesheet" href="assets/vendor/icon-line/css/simple-line-icons.css"/>
 
     <!-- CSS Header and Footer -->
     <link rel="stylesheet" href="assets/css/headers/header-v5.css"/>
@@ -33,10 +35,15 @@
 
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="assets/plugins/animate.css"/>
+    <link rel="stylesheet" href="assets/vendor/icon-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/vendor/icon-line-pro/style.css"/>
+    <link rel="stylesheet" href="assets/vendor/icon-hs/style.css"/>
     <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css"/>
     <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="assets/plugins/noUiSlider/jquery.nouislider.min.css"/>
     <link rel="stylesheet" href="assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css"/>
+
+    <!-- CSS Page Style -->
+    <link rel="stylesheet" href="assets/css/pages/log-reg-v3.css"/>
 
     <!-- Style Switcher -->
     <link rel="stylesheet" href="assets/css/plugins/style-switcher.css"/>
@@ -49,19 +56,20 @@
 </h:head>
 
 <h:body class="header-fixed">
-    <div class="wrapper">
 
+    <div class="wrapper">
         <!--=== Header v5 ===-->
         <div class="header-v5 header-static">
             <!-- Topbar v3 -->
             <div class="topbar-v3">
                 <h:form enctype="multipart/form-data">
+                    <p:growl id="messages" showDetail="true" />
                     <div class="search-open">
                         <div class="container input-group custom-search-form">
                             <p:inputText class="form-control" a:placeholder="Type Keyword to Search Here... Then Press Enter" value="#{searchProduct.keyword}" />
                             <span class="input-group-btn">
-                                    <p:commandButton action="#{searchProduct.searchedResults()}" style="visibility: hidden"/>
-                                </span>
+                                <p:commandButton action="#{searchProduct.searchedResults()}" style="visibility: hidden"/>
+                            </span>
                             <div class="search-close"><i class="icon-close"></i></div>
                         </div>
                     </div>
@@ -74,7 +82,6 @@
                             <div class="search-close"><i class="icon-close"></i></div>
                         </div>
                     </div>
-                    <p:growl id="messages" showDetail="true" />
                 </h:form>
                 <div class="container">
                     <div class="row">
@@ -144,7 +151,7 @@
                             <span class="badge badge-sea rounded-x"><h:outputText value="#{shoppingCartBean.cartSize}" id="cartIcon"/></span>
                             <div class="badge-open">
                                 <ul class="list-unstyled mCustomScrollbar" data-mcs-theme="minimal-dark">
-                                    <p:dataList value="#{shoppingCartBean.cartItems}" var="cart" id="scart">
+                                    <p:dataList id="scart" value="#{shoppingCartBean.cartItems}" var="cart">
                                         <h:graphicImage name="#{cart.item.proPic1}" library="images" width="50" height="50"/>
                                         <div class="overflow-h">
                                             <small><h:outputText value="$#{cart.item.proPrice}"/></small>
@@ -289,118 +296,199 @@
         </div>
         <!--=== End Header v5 ===-->
 
-        <!--=== Breadcrumbs v4 ===-->
+        <!--=== Breadcrumbs ===-->
         <div class="breadcrumbs-v4">
             <div class="container">
-                <span class="page-name">Products Vendor</span>
-                <h1>Cuius <span class="shop-green">
-                    <p:outputLabel value="#{displayProductMB.selectedProduct.merchant.companyName}"/>
-                </span> Store</h1>
+                <span class="page-name">Products Available</span>
+                <h1>Cuius <span class="shop-green">User </span>Account</h1>
                 <ul class="breadcrumb-v4-in">
                     <li><p:link outcome="index.html">Home</p:link></li>
-                    <li><p:link outcome="allproducts.xhtml">Products</p:link></li>
-                    <li class="active">Store Vendor</li>
+                    <li><a href="#">Accounts</a></li>
+                    <li class="active">Personal Info</li>
                 </ul>
             </div><!--/end container-->
         </div>
-        <!--=== End Breadcrumbs v4 ===-->
+        <!--=== End Breadcrumbs ===-->
 
-        <!--=== Content Part ===-->
+        <!--=== Content ===-->
         <div class="content container">
             <div class="row">
+                <div class="col-md-3 filter-by-block md-margin-bottom-60">
+                    <h1><p:outputLabel value="#{accountBean.user.firstName}" rendered="#{accountBean.loggedIn}"/></h1>
+
+                    <div class="panel-group" id="accordion-v2">
+                        <div class="panel panel-default">
+                            
+                            <div id="collapseTwo" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <ul class="list-unstyled checkbox-list">
+                                        <li>
+                                            <a class="d-block align-middle active u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover g-color-primary--parent-active g-bg-gray-light-v5--active rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-finance-135 u-line-icon-pro"></i></span>
+                                                Login &amp; Security
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-finance-114 u-line-icon-pro"></i></span>
+                                                Your Orders
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-finance-115 u-line-icon-pro"></i></span>
+                                                Open Orders
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-finance-113 u-line-icon-pro"></i></span>
+                                                Cancelled Orders
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-medical-022 u-line-icon-pro"></i></span>
+                                                Wishlist
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-real-estate-027 u-line-icon-pro"></i></span>
+                                                Addresses
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-finance-110 u-line-icon-pro"></i></span>
+                                                Payment Options
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-finance-059 u-line-icon-pro"></i></span>
+                                                Your Wallet
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-education-033 u-line-icon-pro"></i></span>
+                                                Notifications
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/end panel group-->
+                </div>
+
                 <div class="col-md-9">
+                    <div class="row margin-bottom-5">
+                        <div class="col-sm-4 result-category">
+                            <h2><p:outputLabel value="#{accountBean.user.lastName}" rendered="#{accountBean.loggedIn}"/></h2>
+                        </div>
+                    </div><!--/end result category-->
+
                     <div class="filter-results">
                         <div class="row illustration-v2 margin-bottom-30">
                             <h:form id="form">
-                                <p:growl id="growl" showDetail="true" />
-                                <p:dataGrid var="product" value="#{displayProductMB.listProductsByMerchant(displayProductMB.selectedProduct.merchant.companyName)}"
-                                            layout="grid" columns="3" rows="9" pageLinks="4" paginator="true" paginatorPosition="bottom"
-                                            paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}" >
-
-                                    <div class="product-img product-img-brd">
-                                        <p:commandLink action="#{searchProduct.clickedProduct()}" title="Full review">
-                                            <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}"/>
-                                            <h:graphicImage name="#{product.proPic1}" library="images" class="full-width img-responsive"/>
-                                        </p:commandLink>
-                                        <p:commandLink class="product-review" update=":form:pro" oncomplete="PF('productOP').show()">
-                                            Quick review
-                                            <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}"/>
-                                        </p:commandLink>
-                                        <p:commandLink id="addtocart" class="add-to-cart" actionListener="#{shoppingCartBean.addToCart(product)}" update=":shopping_cart_form:cartIcon :shopping_cart_form:scart :form:growl">
-                                            <i class="fa fa-shopping-cart"></i>Add to cart
-                                            <f:setPropertyActionListener target="#{cartHandlerMB.productId}" value="#{product.proId}"/>
-                                            <f:setPropertyActionListener target="#{cartHandlerMB.productName}" value="#{product.proName}"/>
-                                            <f:setPropertyActionListener target="#{cartHandlerMB.price}" value="#{product.proPrice}"/>
-                                        </p:commandLink>
-                                        <div class="shop-rgba-dark-green rgba-banner">Vendor: #{displayProductMB.selectedProduct.merchant.companyName}</div>
-                                    </div>
-                                    <div class="product-description product-description-brd margin-bottom-30">
-                                        <div class="overflow-h margin-bottom-5">
-                                            <div class="pull-left">
-                                                <h4 class="title-price">
-                                                    <p:commandLink value="#{product.proName}" action="#{searchProduct.clickedProduct()}">
-                                                        <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}"/>
-                                                    </p:commandLink>
-                                                </h4>
-                                                <span class="gender text-uppercase">
-                                                        <h:outputText value="#{product.subCategory.subCatName}"/>
-                                                    </span>
-                                                <span class="gender">
-                                                        <h:outputText value="#{product.subCategory.category.catName}"/>
-                                                    </span>
+                                
+                                <!-- Login & Security -->
+                                <div class="col-lg-9 g-mb-50">
+                                    <!-- Info -->
+                                    <div class="g-brd-around g-brd-gray-light-v4 rounded g-pa-30 g-mb-30">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="d-block g-color-text g-font-size-13 mb-1">Name:</span>
+                                                <span class="d-block">James</span>
                                             </div>
-                                            <div class="product-price">
-                                                    <span class="title-price">
-                                                        <h:outputText value="$#{product.proPrice}"/>
-                                                    </span>
+
+                                            <div class="col-4 text-right">
+                                                <a class="btn g-brd-around g-brd-gray-light-v3 g-color-gray-dark-v3 g-bg-gray-light-v5 g-bg-gray-light-v4--hover g-font-size-13 rounded g-px-18 g-py-7" href="#">Edit</a>
                                             </div>
                                         </div>
-                                        <ul class="list-inline product-ratings">
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating fa fa-star"></i></li>
-                                            <li><i class="rating fa fa-star"></i></li>
-                                            <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                        </ul>
+
+                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
+
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="d-block g-color-text g-font-size-13 mb-1">Last Name:</span>
+                                                <span class="d-block">Collins</span>
+                                            </div>
+
+                                            <div class="col-4 text-right">
+                                                <a class="btn g-brd-around g-brd-gray-light-v3 g-color-gray-dark-v3 g-bg-gray-light-v5 g-bg-gray-light-v4--hover g-font-size-13 rounded g-px-18 g-py-7" href="#">Edit</a>
+                                            </div>
+                                        </div>
+
+                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
+
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="d-block g-color-text g-font-size-13 mb-1">Email:</span>
+                                                <span class="d-block">james@gmail.com</span>
+                                            </div>
+
+                                            <div class="col-4 text-right">
+                                                <a class="btn g-brd-around g-brd-gray-light-v3 g-color-gray-dark-v3 g-bg-gray-light-v5 g-bg-gray-light-v4--hover g-font-size-13 rounded g-px-18 g-py-7" href="#">Edit</a>
+                                            </div>
+                                        </div>
+
+                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
+
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="d-block g-color-text g-font-size-13 mb-1">Mobile Phone Number:</span>
+                                                <span class="d-block">+(01) 222 333 444</span>
+                                            </div>
+
+                                            <div class="col-4 text-right">
+                                                <a class="btn g-brd-around g-brd-gray-light-v3 g-color-gray-dark-v3 g-bg-gray-light-v5 g-bg-gray-light-v4--hover g-font-size-13 rounded g-px-18 g-py-7" href="#">Edit</a>
+                                            </div>
+                                        </div>
+
+                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
+
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="d-block g-color-text g-font-size-13 mb-1">Password:</span>
+                                                <span class="d-block">*******</span>
+                                            </div>
+
+                                            <div class="col-4 text-right">
+                                                <a class="btn g-brd-around g-brd-gray-light-v3 g-color-gray-dark-v3 g-bg-gray-light-v5 g-bg-gray-light-v4--hover g-font-size-13 rounded g-px-18 g-py-7" href="#">Edit</a>
+                                            </div>
+                                        </div>
+
+                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
+
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <span class="d-block g-color-text g-font-size-13 mb-1">Advanced Security Settings:</span>
+                                                    <span class="d-block">Manage how and when you receive security codes</span>
+                                                </div>
+
+                                                <div class="col-4 text-right">
+                                                    <a class="btn g-brd-around g-brd-gray-light-v3 g-color-gray-dark-v3 g-bg-gray-light-v5 g-bg-gray-light-v4--hover g-font-size-13 rounded g-px-18 g-py-7" href="#">Edit</a>
+                                                </div>
+                                            </div>
                                     </div>
+                                    <!-- End Info -->
 
-                                </p:dataGrid>
-                                <p:dialog widgetVar="productOP" modal="true">
-                                    <p:outputPanel id="pro" style="text-align:center;">
-                                        <p:panelGrid  columns="2">
-
-                                            <p:outputLabel value="Name:" />
-                                            <h:outputText value="#{displayProductMB.selectedProduct.proName}" />
-
-                                            <p:outputLabel value="Price:" />
-                                            <h:outputText value="$#{displayProductMB.selectedProduct.proPrice}" />
-
-                                            <p:outputLabel value="Quantity in stock" />
-                                            <h:outputText value="#{displayProductMB.selectedProduct.proQty}" />
-
-                                            <p:outputLabel value="Vendor:" />
-                                            <h:outputText value="#{displayProductMB.selectedProduct.merchant.companyName}" />
-
-                                            <f:facet name="footer">
-                                                <p:commandButton value="Add To Cart" action="#{shoppingCartBean.addToCart(displayProductMB.selectedProduct)}" update=":shopping_cart_form:cartIcon :shopping_cart_form:scart :form:growl">
-                                                    <f:setPropertyActionListener target="#{cartHandlerMB.productId}" value="#{product.proId}"/>
-                                                    <f:setPropertyActionListener target="#{cartHandlerMB.productName}" value="#{product.proName}"/>
-                                                    <f:setPropertyActionListener target="#{cartHandlerMB.price}" value="#{product.proPrice}"/>
-                                                </p:commandButton>
-                                            </f:facet>
-                                        </p:panelGrid>
-                                    </p:outputPanel>
-                                </p:dialog>
+                                    <button class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" type="submit">Update</button>
+                                </div>
+                                <!-- End Login & Security -->
+                                
                             </h:form>
                         </div>
-                    </div>
+                    </div><!--/end filter results-->
                 </div>
-            </div>
-        </div>
-        <!--=== End Content Part ===-->
+            </div><!--/end row-->
+        </div><!--/end container-->
+        <!--=== End Content ===-->
 
-        <!--=== Shop Suvbscribe ===-->
+        <!--=== Shop Subscribe ===-->
         <div class="shop-subscribe">
             <div class="container">
                 <div class="row">
@@ -418,7 +506,7 @@
                 </div>
             </div><!--/end container-->
         </div>
-        <!--=== End Shop Suvbscribe ===-->
+        <!--=== End Shop Subscribe ===-->
 
         <!--=== Footer v4 ===-->
         <div class="footer-v4">
@@ -504,40 +592,41 @@
             </div><!--/copyright-->
         </div>
         <!--=== End Footer v4 ===-->
-
     </div>
-
     <!-- JS Global Compulsory -->
     <script src="assets/plugins/jquery/jquery-migrate.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- JS Implementing Plugins -->
     <script src="assets/plugins/back-to-top.js"></script>
     <script src="assets/plugins/smoothScroll.js"></script>
-    <script src="assets/plugins/noUiSlider/jquery.nouislider.all.min.js"></script>
     <script src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.form.min.js"></script>
+    <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
     <!-- JS Customization -->
     <script src="assets/js/custom.js"></script>
     <!-- JS Page Level -->
     <script src="assets/js/shop.app.js"></script>
-    <script src="assets/js/plugins/mouse-wheel.js"></script>
+    <script src="assets/js/forms/page_login.js"></script>
     <script src="assets/js/plugins/style-switcher.js"></script>
+    <script src="assets/js/forms/page_contact_form.js"></script>
     <script>
         jQuery(document).ready(function() {
             App.init();
+            Login.initLogin();
             App.initScrollBar();
-            MouseWheel.initMouseWheel();
             StyleSwitcher.initStyleSwitcher();
+            PageContactForm.initPageContactForm();
         });
     </script>
     <!--[if lt IE 9]>
-            <script src="assets/plugins/respond.js"></script>
-            <script src="assets/plugins/html5shiv.js"></script>
-            <script src="assets/js/plugins/placeholder-IE-fixes.js"></script>
-            <![endif]-->
-    <!--[if lt IE 10]>
-            <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
-            <![endif]-->
-
+    <script src="assets/plugins/respond.js"></script>
+    <script src="assets/plugins/html5shiv.js"></script>
+    <script src="assets/js/plugins/placeholder-IE-fixes.js"></script>
+    <script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
+    <![endif]-->
+        <!--[if lt IE 10]>
+        <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
+    <![endif]-->
 </h:body>
 
 </html>

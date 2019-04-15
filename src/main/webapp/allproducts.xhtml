@@ -406,10 +406,10 @@
                         <div class="row margin-bottom-5">
                             <div class="col-sm-4 result-category">
                                 <h2>Products</h2>
-                                <small class="shop-bg-red badge-results">
-                                    <p:outputLabel id="size" value="#{displayProductMB.allProductsSize}" /> Results
-                                </small>
                             </div>
+                            <small class="shop-bg-red badge-results">
+                                <p:outputLabel id="size" value="#{displayProductMB.allProductsSize}" /> Results
+                            </small>
                             <div class="col-sm-8">
                                 <ul class="list-inline clear-both">
                                     <li class="grid-list-icons">
@@ -458,7 +458,7 @@
                                         <div class="product-img product-img-brd">
                                             <p:commandLink action="#{searchProduct.clickedProduct()}" title="Full review">
                                                 <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}"/>
-                                                <h:graphicImage name="#{product.proPic1}" library="images" class="full-width img-responsive" height="300"/>
+                                                <h:graphicImage name="#{product.proPic1}" library="images" class="full-width img-responsive"/>
                                             </p:commandLink>
                                             <p:commandLink class="product-review" update=":form:pro" oncomplete="PF('productOP').show()">
                                                 Quick review

@@ -28,7 +28,6 @@ import javax.faces.model.SelectItem;
 
 import java.io.Serializable;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -368,12 +367,14 @@ public class MapBean implements Serializable {
 
         List<Graphic> graphics = this.starbucksGraphicsModel.getGraphics();
 
-        List<Store> list = stores.getAllStores();
+        graphics.add(buildStarbucksMarker(-17.827116, 31.053617, "TelOne Main Store", "Runhare House Union Ave, Harare Zimbabwe", "Computers and Electronics Store", "#0000FF"));
+        graphics.add(buildStarbucksMarker(-18.364282, 26.507498, "Imuns Botique", "17 Harold Gordon Drive, Hwange Zimbabwe", "Women men and children clothing store", "#A52A2A"));
+        
+        /*List<Store> list = stores.getAllStores();
         for(int i = 0; i<list.size(); i++) {
-
             Store shop = list.get(i);
-            graphics.add(buildStarbucksMarker(shop.getLatitude(), shop.getLongitude(), shop.getStoreName(), shop.getAddress(), shop.getStoreType(), shop.getColorCode()));
-        }
+            graphics.add(buildStarbucksMarker(shop.getLatitude(), shop.getLongitude(), shop.getStoreName(), shop.getAddress(), shop.getStoreType(), shop.getColorCode())); 
+        }*/
     }
     
     //method to locate users by marker
