@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <ul class="list-inline right-topbar pull-right">
-                                    <li><a href="#">Account</a></li>
+                                    <li><p:link value="Account" outcome="account.xhtml" rendered="#{accountBean.loggedIn}"/></li>
                                     <li><a href="#">Wishlist</a></li>
                                     <li><p:link outcome="login.xhtml" value="Login" rendered="#{!accountBean.loggedIn}"/> | <p:link outcome="register.xhtml" value="Register" rendered="#{!accountBean.loggedIn}"/></li>
                                     <li><p:outputLabel value="Hie #{accountBean.user.firstName}" rendered="#{accountBean.loggedIn}"/> | <p:commandLink value="Logout" action="#{accountBean.logout}" rendered="#{accountBean.loggedIn}"/></li>

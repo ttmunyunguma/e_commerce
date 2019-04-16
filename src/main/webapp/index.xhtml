@@ -67,17 +67,6 @@
 
                         <div class="search-open">
                             <div class="container input-group custom-search-form">
-
-<!--                                <p:fileUpload id="fileUpload" value="{vGG16Layer.file}" mode="simple" skinSimple="true" label="Select an Image"
-                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" invalidFileMessage="You can only Search with an Image"/>
-
-                                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                                    <h:graphicImage url="{resource['images:searching.gif']}" alt="Searching..." />
-                                </p:dialog>
-
-                                <p:commandButton value="Search" ajax="false" action="{vGG16Layer.uploadImage}" process="@this"/>-->
-
                                 <p:fileUpload id="fileUpload" value="#{vGG16Layer.file}" mode="advanced" dragDropSupport="true" fileUploadListener="#{vGG16Layer.uploadImage}"
                                               label="Select an Image" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" uploadLabel="Search" 
                                                invalidFileMessage="You can only Search with an Image" update="search_msg"/>
@@ -119,7 +108,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <ul class="list-inline right-topbar pull-right">
-                                    <li><a href="#">Account</a></li>
+                                    <li><p:link value="Account" outcome="account.xhtml" rendered="#{accountBean.loggedIn}"/></li>
                                     <li><a href="#">Wishlist</a></li>
                                     <li><p:link outcome="login.xhtml" value="Login" rendered="#{!accountBean.loggedIn}"/> | <p:link outcome="register.xhtml" value="Register" rendered="#{!accountBean.loggedIn}"/></li>
                                     <li><p:outputLabel value="Hie #{accountBean.user.firstName}" rendered="#{accountBean.loggedIn}"/> | <p:commandLink value="Logout" action="#{accountBean.logout}" rendered="#{accountBean.loggedIn}"/></li>
