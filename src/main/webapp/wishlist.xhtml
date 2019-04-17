@@ -10,7 +10,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>Cuius | Account | User</title>
+    <title>Cuius | Account | Wishlist</title>
     <!-- Meta -->
     <meta charset="utf-8"/>
     <meta http-equiv="Content-Type" content="text/html" />
@@ -300,11 +300,11 @@
         <div class="breadcrumbs-v4">
             <div class="container">
                 <span class="page-name">Products Available</span>
-                <h1>Cuius <span class="shop-green">User </span>Account</h1>
+                <h1>Cuius <span class="shop-green">User </span>Wishlist</h1>
                 <ul class="breadcrumb-v4-in">
                     <li><p:link outcome="index.html">Home</p:link></li>
-                    <li><a href="#">Accounts</a></li>
-                    <li class="active">Personal Info</li>
+                    <li><p:link outcome="account.xhtml">Accounts</p:link></li>
+                    <li class="active">Wishlist</li>
                 </ul>
             </div><!--/end container-->
         </div>
@@ -323,9 +323,9 @@
                                 <div class="panel-body">
                                     <ul class="list-unstyled checkbox-list">
                                         <li>
-                                            <a class="d-block align-middle active u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover g-color-primary--parent-active g-bg-gray-light-v5--active rounded g-pa-3" href="#">
-                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-finance-135 u-line-icon-pro"></i></span>
-                                                Login &amp; Security
+                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-medical-022 u-line-icon-pro"></i></span>
+                                                Wishlist
                                             </a>
                                         </li>
                                         <li>
@@ -347,10 +347,10 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
-                                                <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-medical-022 u-line-icon-pro"></i></span>
-                                                Wishlist
-                                            </a>
+                                            <p:link class=" active rounded" outcome="account.xhtml">
+                                                <span class="u-icon-v1 mr-2"><i class="icon-finance-135 u-line-icon-pro"></i></span>
+                                                Login &amp; Security
+                                            </p:link>
                                         </li>
                                         <li>
                                             <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
@@ -395,70 +395,7 @@
                             <h:form id="form">
                                 
                                 <!-- Login & Security -->
-                                <div class="col-lg-9 g-mb-50">
-                                    <!-- Info -->
-                                    <div class="g-brd-around g-brd-gray-light-v4 rounded g-pa-30 g-mb-30">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span><h:outputLabel value="First Name:   " /></span>
-                                                <span><p:outputLabel value="#{accountBean.user.firstName}" /></span>
-                                            </div>
-                                        </div>
-
-                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
-
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span><h:outputLabel value="Last Name: " /></span>
-                                                <span><p:outputLabel value="#{accountBean.user.lastName}" /></span>
-                                            </div>
-                                        </div>
-
-                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
-
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span><h:outputLabel value="Email: " /></span>
-                                                <span><p:outputLabel value="#{accountBean.user.email}" /></span>
-                                            </div>
-                                        </div>
-
-                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
-
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span><h:outputLabel value="Mobile Phone Number: " /></span>
-                                                <span><p:outputLabel value="#{accountBean.user.contactNo}" /></span>
-                                            </div>
-                                        </div>
-
-                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
-
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span><h:outputLabel value="Password:   " /></span>
-                                                <span><p:outputLabel value="*********" /></span>
-                                            </div>
-                                        </div>
-
-                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
-
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <span class="d-block g-color-text g-font-size-13 mb-1">Advanced Security Settings:</span><br/>
-                                                    <span class="d-block">Manage how and when you receive security codes</span>
-                                                </div>
-
-                                                <div class="col-4 text-right">
-                                                    <p:commandButton class="btn rounded" value="Edit" />
-                                                </div>
-                                            </div>
-                                        <hr class="g-brd-gray-light-v4 g-my-20"/>
-                                    </div>
-                                    <!-- End Info -->
-
-                                    <p:commandButton class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" value="Update"/>
-                                </div>
+                                
                                 <!-- End Login & Security -->
                                 
                             </h:form>
