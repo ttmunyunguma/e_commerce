@@ -117,7 +117,7 @@
                         <div class="col-sm-6">
                             <ul class="list-inline right-topbar pull-right">
                                 <li><p:link value="Account" outcome="account.xhtml" rendered="#{accountBean.loggedIn}"/></li>
-                                <li><a href="#">Wishlist</a></li>
+                                <li><p:link value="Wishlist" outcome="wishlist.xhtml" rendered="#{accountBean.loggedIn}"/></li>
                                 <li><p:link outcome="login.xhtml" value="Login" rendered="#{!accountBean.loggedIn}"/> | <p:link outcome="register.xhtml" value="Register" rendered="#{!accountBean.loggedIn}"/></li>
                                 <li><p:outputLabel value="Hie #{accountBean.user.firstName}" rendered="#{accountBean.loggedIn}"/> | <p:commandLink value="Logout" action="#{accountBean.logout}" rendered="#{accountBean.loggedIn}"/></li>
                                 <li><i class="search fa fa-search search-button"></i></li>
@@ -299,7 +299,7 @@
         <!--=== Breadcrumbs ===-->
         <div class="breadcrumbs-v4">
             <div class="container">
-                <span class="page-name">Products Available</span>
+                <span class="page-name">Wished Products</span>
                 <h1>Cuius <span class="shop-green">User </span>Wishlist</h1>
                 <ul class="breadcrumb-v4-in">
                     <li><p:link outcome="index.html">Home</p:link></li>
@@ -393,10 +393,45 @@
                     <div class="filter-results">
                         <div class="row illustration-v2 margin-bottom-30">
                             <h:form id="form">
-                                
-                                <!-- Login & Security -->
-                                
-                                <!-- End Login & Security -->
+                                <p:growl id="growl" showDetail="true" sticky="true"/>
+                                <!-- Data List -->
+                                <div class="table-responsive">
+                                    <p:dataTable var="wishlist" value="#{wishlistBean.wishlistItems}" class="table table-striped">
+
+                                        <p:column>
+                                            <h:graphicImage class="img-responsive" name="#{wishlist.item.proPic1}" library="images"/>
+                                        </p:column>
+
+                                        <p:column headerText="Product" class="product-in-table">
+                                            <h3><p:outputLabel value="#{wishlist.item.proName}" class="product-it-in"/></h3>
+                                        </p:column>
+
+                                        <p:column headerText="Price">
+                                            <p:outputLabel value="$ #{wishlist.item.proPrice}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Quantity">
+                                            <h:commandButton type='button' class="quantity-button" onclick='javascript: subtractQty1();' value='-'></h:commandButton>
+                                            <p:inputText value="#{wishlist.quantity}" class="quantity-field" label='qty1' id='qty1'/>
+                                            <h:commandButton type='button' class="quantity-button" onclick='javascript: document.getElementById("qty1").value++;' value='+'></h:commandButton>
+                                        </p:column>
+
+                                        <p:column headerText="TOTAL $">
+                                            <p:outputLabel value="#{wishlist.item.proPrice}" class="shop-red"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <p:commandButton value="&times;" action="#{wishlistBean.removeItemFromWishlist(cart.item)}" class="close" update=":form:growl">
+                                                <span class="sr-only">Close</span>
+                                            </p:commandButton>
+                                        </p:column>
+
+                                    </p:dataTable>
+                                    <p:commandButton value="Update Cart" action="#{wishlistBean.updateQuantity()}" ajax="false"/>
+                                    <p:commandButton value="Continue Shopping" action="#{searchProduct.continueShopping()}" ajax="false"/>
+                                    <br/><br/>If you're done just click the <strong>NEXT</strong> button below
+                                </div>
+                                <!-- End Data List -->
                                 
                             </h:form>
                         </div>

@@ -117,7 +117,7 @@
                         <div class="col-sm-6">
                             <ul class="list-inline right-topbar pull-right">
                                 <li><p:link value="Account" outcome="account.xhtml" rendered="#{accountBean.loggedIn}"/></li>
-                                <li><a href="#">Wishlist</a></li>
+                                <li><p:link value="Wishlist" outcome="wishlist.xhtml" rendered="#{accountBean.loggedIn}"/></li>
                                 <li><p:link outcome="login.xhtml" value="Login" rendered="#{!accountBean.loggedIn}"/> | <p:link outcome="register.xhtml" value="Register" rendered="#{!accountBean.loggedIn}"/></li>
                                 <li><p:outputLabel value="Hie #{accountBean.user.firstName}" rendered="#{accountBean.loggedIn}"/> | <p:commandLink value="Logout" action="#{accountBean.logout}" rendered="#{accountBean.loggedIn}"/></li>
                                 <li><i class="search fa fa-search search-button"></i></li>
@@ -347,10 +347,10 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">
+                                            <p:link class="d-block align-middle u-link-v5 rounded " outcome="wishlist.xhtml">
                                                 <span class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i class="icon-medical-022 u-line-icon-pro"></i></span>
                                                 Wishlist
-                                            </a>
+                                            </p:link>
                                         </li>
                                         <li>
                                             <a class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3" href="#">

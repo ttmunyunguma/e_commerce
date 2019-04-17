@@ -31,17 +31,17 @@
 
                                 <p:growl id="growl1" showSummary="true" showDetail="true"></p:growl>
                                     
-                                <h:panelGroup id="panel1" layout="block" styleClass="gisfacesMapPanel" rendered="#{geoLocationBean.event != null}" />
-                                <gis:map id="map1" mapPanel="panel1" background="streets" latitude="#{geoLocationBean.event.latitude}" longitude="#{geoLocationBean.event.longitude}" zoom="5">
+                                <h:panelGroup id="panel1" layout="block" styleClass="gisfacesMapPanel" /> 
+                                <gis:map id="map1" mapPanel="panel1" background="streets" latitude="#{mapBean.latitude}" longitude="#{mapBean.longitude}" zoom="5">
                                     <gis:service type="graphics" model="#{mapBean.starbucksGraphicsModel}"></gis:service>
                                     <f:ajax event="click" listener="#{mapBean.doMapClickListener}" render="growl1"></f:ajax>
                                     <f:ajax event="view" listener="#{mapBean.doMapGraphicViewListener}" render="growl1"></f:ajax>
                                     <f:ajax event="action" listener="#{mapBean.doMapGraphicActionListener}" render="growl1"></f:ajax>
                                     <f:ajax event="drag" listener="#{mapBean.doMapGraphicDragListener}" render="growl1"></f:ajax>
                                 </gis:map>
-                                <gis:geolocation id="geolocation1" watch="#{geoLocationBean.watch}" accuracy="#{geoLocationBean.accuracy}" timeout="#{geoLocationBean.timeout}" maximumAge="#{geoLocationBean.maximumAge}">
-                                    <f:ajax listener="#{geoLocationBean.doGeoLocationListener}"></f:ajax>
-                                </gis:geolocation>
+<!--                                <gis:geolocation id="geolocation1" watch="{geoLocationBean.watch}" accuracy="{geoLocationBean.accuracy}" timeout="#{geoLocationBean.timeout}" maximumAge="#{geoLocationBean.maximumAge}">
+                                    <f:ajax listener="{geoLocationBean.doGeoLocationListener}"></f:ajax>
+                                </gis:geolocation>-->
                             </h:form>
                             <!--product-->
                         </div>
