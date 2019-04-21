@@ -28,7 +28,6 @@
                         <div class="panel-body">
                             <!--product-->
                             <h:form >
-
                                 <p:growl id="growl1" showSummary="true" showDetail="true"></p:growl>
                                     
                                 <h:panelGroup id="panel1" layout="block" styleClass="gisfacesMapPanel" /> 
@@ -39,9 +38,9 @@
                                     <f:ajax event="action" listener="#{mapBean.doMapGraphicActionListener}" render="growl1"></f:ajax>
                                     <f:ajax event="drag" listener="#{mapBean.doMapGraphicDragListener}" render="growl1"></f:ajax>
                                 </gis:map>
-<!--                                <gis:geolocation id="geolocation1" watch="{geoLocationBean.watch}" accuracy="{geoLocationBean.accuracy}" timeout="#{geoLocationBean.timeout}" maximumAge="#{geoLocationBean.maximumAge}">
-                                    <f:ajax listener="{geoLocationBean.doGeoLocationListener}"></f:ajax>
-                                </gis:geolocation>-->
+                                <gis:geolocation id="geolocation1" watch="#{geoLocationBean.watch}" accuracy="#{geoLocationBean.accuracy}" timeout="#{geoLocationBean.timeout}" maximumAge="#{geoLocationBean.maximumAge}">
+                                    <f:ajax listener="#{geoLocationBean.doGeoLocationListener}"></f:ajax>
+                                </gis:geolocation>
                             </h:form>
                             <!--product-->
                         </div>

@@ -392,7 +392,7 @@
 
                     <div class="filter-results">
                         <div class="row illustration-v2 margin-bottom-30">
-                            <h:form id="form">
+                            <h:form id="wishlist-form">
                                 <p:growl id="growl" showDetail="true" sticky="true"/>
                                 <!-- Data List -->
                                 <div class="table-responsive">
@@ -411,25 +411,22 @@
                                         </p:column>
 
                                         <p:column headerText="Quantity">
-                                            <h:commandButton type='button' class="quantity-button" onclick='javascript: subtractQty1();' value='-'></h:commandButton>
-                                            <p:inputText value="#{wishlist.quantity}" class="quantity-field" label='qty1' id='qty1'/>
-                                            <h:commandButton type='button' class="quantity-button" onclick='javascript: document.getElementById("qty1").value++;' value='+'></h:commandButton>
+                                            <p:outputLabel value="#{wishlist.quantity}" class="quantity-field" id='qty1'/>
                                         </p:column>
 
                                         <p:column headerText="TOTAL $">
                                             <p:outputLabel value="#{wishlist.item.proPrice}" class="shop-red"/>
                                         </p:column>
 
-                                        <p:column>
-                                            <p:commandButton value="&times;" action="#{wishlistBean.removeItemFromWishlist(cart.item)}" class="close" update=":form:growl">
+                                        <p:column headerText="Remove">
+                                            <p:commandButton value="&times;" action="#{wishlistBean.removeItemFromWishlist(wishlist.item)}" class="close" update=":wishlist-form:growl">
                                                 <span class="sr-only">Close</span>
                                             </p:commandButton>
                                         </p:column>
 
                                     </p:dataTable>
-                                    <p:commandButton value="Update Cart" action="#{wishlistBean.updateQuantity()}" ajax="false"/>
+                                    <p:commandButton value="Update List" action="#{wishlistBean.updateQuantity()}" ajax="false"/>
                                     <p:commandButton value="Continue Shopping" action="#{searchProduct.continueShopping()}" ajax="false"/>
-                                    <br/><br/>If you're done just click the <strong>NEXT</strong> button below
                                 </div>
                                 <!-- End Data List -->
                                 

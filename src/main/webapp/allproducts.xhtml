@@ -451,7 +451,7 @@
                         <div class="filter-results">
                             <div class="row illustration-v2 margin-bottom-30">
                                 <h:form id="form">
-                                    <p:growl id="growl" showDetail="true" />
+                                    <p:growl id="growl" showDetail="true" sticky="true"/>
                                     <p:dataGrid var="product" value="#{displayProductMB.allProducts}" columns="3" layout="grid" 
                                                 pageLinks="4" rows="9" paginator="true" paginatorPosition="bottom" 
                                                 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}" >
@@ -499,7 +499,11 @@
                                                 <li><i class="rating-selected fa fa-star"></i></li>
                                                 <li><i class="rating fa fa-star"></i></li>
                                                 <li><i class="rating fa fa-star"></i></li>
-                                                <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li class="like-icon">
+                                                    <p:commandLink action="#{wishlistBean.addToWishlist(product)}" class="tooltips" title="Add to wishlist" update=":form:growl">
+                                                        <i class="fa fa-heart"></i>
+                                                    </p:commandLink>
+                                                </li>
                                             </ul>
                                         </div>
                                     </p:dataGrid>

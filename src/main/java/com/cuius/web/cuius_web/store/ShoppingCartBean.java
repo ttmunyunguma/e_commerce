@@ -78,7 +78,6 @@ public class ShoppingCartBean implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Successful", item.getProName() + " added to cart"));
 
-//        PrimeFaces.current().dialog().showMessageDynamic(message);
         return null;
     }
     

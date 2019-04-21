@@ -69,7 +69,7 @@
                             <div class="container input-group custom-search-form">
                                 <p:fileUpload id="fileUpload" value="#{vGG16Layer.file}" mode="advanced" dragDropSupport="true" fileUploadListener="#{vGG16Layer.uploadImage}"
                                               label="Select an Image" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" uploadLabel="Search" 
-                                               invalidFileMessage="You can only Search with an Image" update="search_msg"/>
+                                              invalidFileMessage="You can only Search with an Image" update="search_msg"/>
 
                                 <div class="search-close"><i class="icon-close"></i></div>
                             </div>
@@ -577,7 +577,7 @@
                         <a class="owl-btn next rounded-x"><i class="fa fa-angle-right"></i></a>
                     </div>
                     <h:form id="form">
-                        <p:growl id="growl" showDetail="true" />
+                        <p:growl id="growl" showDetail="true" sticky="true"/>
                         <ul class="list-inline owl-slider">
                             <ui:repeat value="#{displayProductMB.randomProducts}" var="product">
                                 <li class="item">
@@ -590,7 +590,7 @@
                                             <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}"/>
                                             Full review
                                         </p:commandLink>
-                                        <p:commandLink class="add-to-cart" action="#{shoppingCartBean.addToCart(product)}" update=":shopping_cart_form:cartIcon :shopping_cart_form:scart">
+                                        <p:commandLink class="add-to-cart" action="#{shoppingCartBean.addToCart(product)}" update=":shopping_cart_form:cartIcon :shopping_cart_form:scart :form:growl">
                                             <i class="fa fa-shopping-cart"></i>Add to cart
                                             <f:setPropertyActionListener target="#{cartHandlerMB.productId}" value="#{product.proId}"/>
                                             <f:setPropertyActionListener target="#{cartHandlerMB.productName}" value="#{product.proName}"/>
@@ -625,7 +625,11 @@
                                             <li><i class="rating-selected fa fa-star"></i></li>
                                             <li><i class="rating-selected fa fa-star"></i></li>
                                             <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li class="like-icon">
+                                                <p:commandLink action="#{wishlistBean.addToWishlist(product)}" class="tooltips" title="Add to wishlist" update=":form:growl">
+                                                    <i class="fa fa-heart"></i>
+                                                </p:commandLink>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
@@ -689,7 +693,7 @@
                 <!--=== Illustration v2 ===-->
                 <div class="row illustration-v2">
                     <h:form id="form_latest">
-                        <p:growl id="growl" showDetail="true" /> 
+                        <p:growl id="growl" showDetail="true" sticky="true"/> 
                         <ui:repeat value="#{displayProductMB.randomFourProducts}" var="product">
                             <div class="col-md-3 col-sm-6 md-margin-bottom-30">
                                 <div class="product-img">
@@ -731,7 +735,11 @@
                                         <li><i class="rating-selected fa fa-star"></i></li>
                                         <li><i class="rating fa fa-star"></i></li>
                                         <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li class="like-icon">
+                                            <p:commandLink action="#{wishlistBean.addToWishlist(product)}" class="tooltips" title="Add to wishlist" update=":form_latest:growl">
+                                                <i class="fa fa-heart"></i>
+                                            </p:commandLink>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

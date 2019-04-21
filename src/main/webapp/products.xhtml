@@ -396,7 +396,7 @@
                             <ul class="list-inline add-to-wishlist add-to-wishlist-brd">
                                 <li class="wishlist-in">
                                     <i class="fa fa-heart"></i>
-                                    <a href="#">Add to Wishlist</a>
+                                    <p:commandLink action="#{wishlistBean.addToWishlist(displayProductMB.selectedProduct)}" value="Add to Wishlist" update=":form:growl" />
                                 </li>
                                 <li class="compare-in">
                                     <i class="fa fa-exchange"></i>
