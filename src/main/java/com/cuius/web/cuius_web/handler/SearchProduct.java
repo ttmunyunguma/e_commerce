@@ -117,4 +117,20 @@ public class SearchProduct implements Serializable{
 //            Logger.getLogger(SearchProduct.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }
+    
+    public void editProduct(){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("editproduct.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(SearchProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cancelEdit(){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("viewproducts.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(SearchProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

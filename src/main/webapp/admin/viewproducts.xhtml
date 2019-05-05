@@ -9,7 +9,7 @@
     <body>
 
         <ui:composition template="./template.xhtml">
-            
+
             <ui:param name="pageTitle" value="Cuius Admin | View Products"/>
 
             <ui:define name="content">
@@ -26,53 +26,44 @@
                                         All Products
                                     </div>
                                     <div class="panel-body">
-                                                <!--Sub categories-->
-                                                <h:form id="form">
-                                                    <p:dataTable var="product" value="#{displayProductMB.allProducts}">
-                                                        <p:column headerText="Id">
-                                                            <h:outputText value="#{product.proId}" />
-                                                        </p:column>
-                                                        <p:column headerText="Name">
-                                                            <h:outputText value="#{product.proName}" />
-                                                        </p:column>
-                                                        <p:column headerText="Sub Category">
-                                                            <h:outputText value="#{product.subCategory.subCatName}" />
-                                                        </p:column>
-                                                        <p:column headerText="Category">
-                                                            <h:outputText value="#{product.subCategory.category.catName}" />
-                                                        </p:column>
-                                                        <p:column headerText="Vendor">
-                                                            <h:outputText value="#{product.merchant.companyName}" />
-                                                        </p:column>
-                                                        <p:column headerText="How May In Stock">
-                                                            <h:outputText value="#{product.proQty}" />
-                                                        </p:column>
-                                                        <p:column headerText="Price">
-                                                            <h:outputText value="#{product.proPrice}" />
-                                                        </p:column>
-                                                        <p:column headerText="Description">
-                                                            <h:outputText value="#{product.proDesc}" />
-                                                        </p:column>
-                                                        <p:column headerText="Image" >
-                                                            <p:graphicImage name="#{product.proPic1}" />
-<!--                                                            <p:commandButton oncomplete="PF('proOP').show()" icon="ui-icon-search" title="View">
-                                                                <f:setPropertyActionListener value="{product}" target="{displayProductMB.selectedProduct}" />
-                                                            </p:commandButton>-->
-                                                        </p:column>
-                                                    </p:dataTable>
-                                                    
-<!--                                                    <p:sidebar baseZIndex="10000" widgetVar="proOP" >
-                                                        <p:outputPanel id="proImg">
-                                                            <p:panelGrid rendered="{not empty displayProductMB.selectedProduct}">
-                                                                <f:facet name="header">
-                                                                    <p:graphicImage name="{displayProductMB.selectedProduct.proPic1}" /> 
-                                                                </f:facet>
-                                                            </p:panelGrid>
-                                                        </p:outputPanel>
-                                                    </p:sidebar>-->
-                                                    
-                                                </h:form>
-                                                <!--categories-->
+                                        <!--Sub categories-->
+                                        <h:form id="form">
+                                            <p:dataTable var="product" value="#{displayProductMB.allProducts}">
+                                                <p:column headerText="Id">
+                                                    <h:outputText value="#{product.proId}" />
+                                                </p:column>
+                                                <p:column headerText="Name">
+                                                    <h:outputText value="#{product.proName}" />
+                                                </p:column>
+                                                <p:column headerText="Sub Category">
+                                                    <h:outputText value="#{product.subCategory.subCatName}" />
+                                                </p:column>
+                                                <p:column headerText="Category">
+                                                    <h:outputText value="#{product.subCategory.category.catName}" />
+                                                </p:column>
+                                                <p:column headerText="Vendor">
+                                                    <h:outputText value="#{product.merchant.companyName}" />
+                                                </p:column>
+                                                <p:column headerText="How May In Stock">
+                                                    <h:outputText value="#{product.proQty}" />
+                                                </p:column>
+                                                <p:column headerText="Price">
+                                                    <h:outputText value="#{product.proPrice}" />
+                                                </p:column>
+                                                <p:column headerText="Description">
+                                                    <h:outputText value="#{product.proDesc}" />
+                                                </p:column>
+                                                <p:column headerText="Edit" >
+                                                    <p:lightBox iframe="true" id="lighbox">
+                                                        <p:commandButton id="editBtn" action="#{searchProduct.editProduct()}" icon="fa fa-fw fa-edit" title="Change">
+                                                            <f:setPropertyActionListener value="#{product}" target="#{displayProductMB.selectedProduct}" />
+                                                        </p:commandButton>
+                                                    </p:lightBox>
+                                                </p:column>
+                                            </p:dataTable>
+
+                                        </h:form>
+                                        <!--categories-->
                                     </div>
                                 </div>
                             </div>
