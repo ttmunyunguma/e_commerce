@@ -11,50 +11,60 @@
     <h:body>
         <h:form>
             <p:growl id="growl" showDetail="true" />
-        <p:outputPanel id="editProduct">
-            <p:panelGrid rendered="#{not empty displayProductMB.selectedProduct}" columns="3">
-                <f:facet name="header">
-                    <p:graphicImage name="#{displayProductMB.selectedProduct.proPic1}" /> 
-                </f:facet>
-                <p:outputLabel value="ID: " />
-                <p:outputLabel value="#{displayProductMB.selectedProduct.proId}" />
-                <p:commandButton value="&times;" />
+            <p:outputPanel id="editProduct">
+                <p:panelGrid rendered="#{not empty displayProductMB.selectedProduct}" columns="3">
+                    <f:facet name="header">
+                        <p:graphicImage name="#{displayProductMB.selectedProduct.proPic1}" /> 
+                    </f:facet>
+                    <p:outputLabel value="ID: " />
+                    <p:outputLabel value="#{displayProductMB.selectedProduct.proId}" />
+                    <p:commandButton value="&times;" />
 
-                <p:outputLabel value="Name: " />
-                <p:outputLabel value="#{displayProductMB.selectedProduct.proName}" />
-                <p:inputText value="#{editProduct.productName}" a:placeholder="Change Name" />
+                    <p:outputLabel value="Name: " />
+                    <p:outputLabel value="#{displayProductMB.selectedProduct.proName}" />
+                    <p:inputText value="#{editProduct.productName}" a:placeholder="Change Name" />
 
-                <p:outputLabel value="Sub_Cat: " />
-                <p:outputLabel value="#{displayProductMB.selectedProduct.subCategory.subCatName}" />
-                <p:commandButton value="&times;" />
+                    <p:outputLabel value="Sub_Cat: " />
+                    <p:outputLabel value="#{displayProductMB.selectedProduct.subCategory.subCatName}" />
+                    <p:commandButton value="&times;" />
 
-                <p:outputLabel value="Cat: " />
-                <p:outputLabel value="#{displayProductMB.selectedProduct.subCategory.category.catName}" />
-                <p:commandButton value="&times;" />
+                    <p:outputLabel value="Cat: " />
+                    <p:outputLabel value="#{displayProductMB.selectedProduct.subCategory.category.catName}" />
+                    <p:commandButton value="&times;" />
 
-                <p:outputLabel value="Vendor: " />
-                <p:outputLabel value="#{displayProductMB.selectedProduct.merchant.companyName}" />
-                <p:commandButton value="&times;" />
+                    <p:outputLabel value="Vendor: " />
+                    <p:outputLabel value="#{displayProductMB.selectedProduct.merchant.companyName}" />
+                    <p:commandButton value="&times;" />
 
-                <p:outputLabel value="Stock: " />
-                <p:outputLabel value="#{displayProductMB.selectedProduct.proQty}" />
-                <p:inputText value="#{editProduct.quantity}" a:placeholder="Change Quantity" />
+                    <p:outputLabel value="Stock: " />
+                    <p:outputLabel value="#{displayProductMB.selectedProduct.proQty}" />
+                    <p:inputText value="#{editProduct.quantity}" a:placeholder="Change Quantity" converterMessage="Please provide a valid Quantity" required="true" requiredMessage="Enter Quantity in stock">
+                        <f:convertNumber type="number" maxFractionDigits="0" />
+                    </p:inputText>
 
-                <p:outputLabel value="Price: " />
-                <p:outputLabel value="$#{displayProductMB.selectedProduct.proPrice}" />
-                <p:inputText value="#{editProduct.price}" a:placeholder="Change Price" />
+                    <p:outputLabel value="Price: " />
+                    <p:outputLabel value="$#{displayProductMB.selectedProduct.proPrice}" />
+                    <p:inputText value="#{editProduct.price}" a:placeholder="Change Price" converterMessage="Please provide a valid price. Without the $ sign">
+                        <f:convertNumber type="number" maxFractionDigits="2" />
+                    </p:inputText>
 
-                <p:outputLabel value="Description: " />
-                <p:outputLabel value="#{displayProductMB.selectedProduct.proDesc}" />
-                <p:inputTextarea value="#{editProduct.productDescription}" a:placeholder="Change Description" />
-                
-                <h:commandButton value="Cancel" action="#{searchProduct.cancelEdit()}"/>
-                <p:commandButton value="Change" action="#{editProduct.changeProductInfo()}" update="growl"/>
-                <p:commandButton value="Delete" />
+                    <p:outputLabel value="Description: " />
+                    <p:outputLabel value="#{displayProductMB.selectedProduct.proDesc}" />
+                    <p:inputTextarea value="#{editProduct.productDescription}" a:placeholder="Change Description" />
 
-            </p:panelGrid>
-        </p:outputPanel>
-            </h:form>
+                    <h:commandButton value="Cancel" action="#{searchProduct.cancelEdit()}"/>
+                    <p:commandButton value="Change" action="#{editProduct.changeProductInfo()}" update="growl"/>
+                    <p:commandButton value="Delete" actionListener="#{editProduct.deleteProduct()}" update="growl">
+                        <p:confirm header="Delete Product" message="Are you sure?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+
+                </p:panelGrid>
+            </p:outputPanel>
+        </h:form>
     </h:body>
 </html>
 

@@ -20,12 +20,16 @@ package com.cuius.web.cuius_web.handler;
 import com.cuius.web.cuius_web.dao.EditDao;
 import com.cuius.web.cuius_web.entity.Product;
 import com.cuius.web.cuius_web.util.HibernateUtil;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,69 +45,81 @@ public class EditProduct implements Serializable {
     // ======================================
     // =             Attributes             =
     // ======================================
-    
     private String productName;
-    private double price;
-    private int quantity;
+    private String price;
+    private String quantity;
     private String productDescription;
     static SessionFactory factory = HibernateUtil.getSessionFactory();
     Product product = new Product();
-    
-    
+
     // ======================================
     // =         Injection Points           =
     // ======================================
-    
     @Inject
     DisplayProductMB displayProductMB;
-    
+
     /**
      * Creates a new instance of EditProduct
      */
     public EditProduct() {
     }
-    
+
     // ======================================
     // =         Business Methods           =
     // ======================================
-    
-    public void changeProductInfo(){
-        
+    public void changeProductInfo() {
+
         try {
             try (Session session = factory.openSession()) {
                 session.beginTransaction();
                 product = session.get(Product.class, displayProductMB.getSelectedProduct().getProId());
-                
-                if (productName.trim() != null) {
+
+                if (!StringUtils.isBlank(productName)) {
                     product.setProName(productName);
-                } else if (productDescription.trim() != null) {
-                    product.setProDesc(productDescription);
-                } else if (String.valueOf(price).trim() != null) {
-                    product.setProPrice(price);
-                } else if (String.valueOf(quantity).trim() != null) {
-                    product.setProQty(quantity);
                 }
-                
+                if (!StringUtils.isBlank(productDescription)) {
+                    product.setProDesc(productDescription);
+                }
+                if (!StringUtils.isBlank(price)) {
+                    product.setProPrice(Double.parseDouble(price));
+                }
+                if (!StringUtils.isBlank(String.valueOf(quantity))) {
+                    product.setProQty(Integer.parseInt(quantity));
+                }
+
                 session.update(product);
                 session.getTransaction().commit();
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Data Saved", ""));
+                FacesContext.getCurrentInstance().getExternalContext().redirect("viewproducts.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(EditProduct.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } catch (HibernateException e) {
+            Logger.getLogger(EditProduct.class.getName()).log(Level.SEVERE, null, e);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Data Save Failed", ""));
         }
-        
-//        if(status)
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Data Saved", ""));
-//        else
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Data Save Failed", ""));
-        
+
     }
-    
-    
+
+    public void deleteProduct() {
+
+        boolean status = new EditDao().deleteProduct(displayProductMB.getSelectedProduct().getProId());
+        if (status) {
+            try {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Delete Successfull", ""));
+                FacesContext.getCurrentInstance().getExternalContext().redirect("viewproducts.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(EditProduct.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Could Not Delete", "There was an error"));
+    }
+
     // ======================================
     // =       Setters and Getters          =
     // ======================================
-
     public String getProductName() {
         return productName;
     }
@@ -112,19 +128,19 @@ public class EditProduct implements Serializable {
         this.productName = productName;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
@@ -135,5 +151,5 @@ public class EditProduct implements Serializable {
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
     }
-    
+
 }
